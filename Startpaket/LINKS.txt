@@ -1,0 +1,12 @@
+// CITAVI
+https://www.ub.rwth-aachen.de/cms/ub/Service/Literatur-verwalten/~hsdc/Citavi/
+
+// JABREF
+https://www.jabref.org/
+
+// OVERLEAF (online Latex Editor)
+https://www.overleaf.com/
+
+// LATEX (offline, little tricky)
+https://miktex.org/download
+https://www.texstudio.org/
