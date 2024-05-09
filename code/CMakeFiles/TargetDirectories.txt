@@ -1,0 +1,4 @@
+C:/Repositories/Medit/MeditC++wrapper/code/CMakeFiles/module_name.dir
+C:/Repositories/Medit/MeditC++wrapper/code/CMakeFiles/ALL_BUILD.dir
+C:/Repositories/Medit/MeditC++wrapper/code/CMakeFiles/ZERO_CHECK.dir
+C:/Repositories/Medit/MeditC++wrapper/code/pybind11/CMakeFiles/ALL_BUILD.dir
