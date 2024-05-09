@@ -24,9 +24,14 @@ class TestClass{
         float multiply(float input_mul){
             return input_mul*multiplier;
         }
-}
+};
 
 PYBIND11_MODULE(module_name, handle){
     handle.doc() = "This is the module docs.";
     handle.def("addFloat", &addFloat); 
+
+    py::class_<TestClass>(handle, "TestClass")
+        .def(py::init<float>())
+        .def("multiply", &TestClass::multiply)
+        ;
 }
