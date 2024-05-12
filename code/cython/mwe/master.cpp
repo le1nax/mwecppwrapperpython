@@ -1820,7 +1820,7 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
  */
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 
-/* "Multiply_wrapper.pyx":8
+/* "Multiply_wrapper.pyx":9
  * # as an attribute and create a bunch of forwarding methods
  * # Python extension type.
  * cdef class PyMultiply:             # <<<<<<<<<<<<<<
@@ -6387,8 +6387,8 @@ static PyObject *__pyx_pf_6master_12add_numpy_elements(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "Multiply_wrapper.pyx":11
- *     cdef Multiply multiply_inst  # Hold a C++ instance which we're wrapping
+/* "Multiply_wrapper.pyx":13
+ * 
  * 
  *     def __init__(self, double factor1, double factor2):             # <<<<<<<<<<<<<<
  *         self.multiply_inst = Multiply(factor1, factor2)
@@ -6434,7 +6434,7 @@ static int __pyx_pw_6master_10PyMultiply_1__init__(PyObject *__pyx_v_self, PyObj
           (void)__Pyx_Arg_NewRef_VARARGS(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(4, 11, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(4, 13, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -6442,14 +6442,14 @@ static int __pyx_pw_6master_10PyMultiply_1__init__(PyObject *__pyx_v_self, PyObj
           (void)__Pyx_Arg_NewRef_VARARGS(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(4, 11, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(4, 13, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(4, 11, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(4, 13, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(4, 11, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(4, 13, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -6457,12 +6457,12 @@ static int __pyx_pw_6master_10PyMultiply_1__init__(PyObject *__pyx_v_self, PyObj
       values[0] = __Pyx_Arg_VARARGS(__pyx_args, 0);
       values[1] = __Pyx_Arg_VARARGS(__pyx_args, 1);
     }
-    __pyx_v_factor1 = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_factor1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(4, 11, __pyx_L3_error)
-    __pyx_v_factor2 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_factor2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(4, 11, __pyx_L3_error)
+    __pyx_v_factor1 = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_factor1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(4, 13, __pyx_L3_error)
+    __pyx_v_factor2 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_factor2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(4, 13, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, __pyx_nargs); __PYX_ERR(4, 11, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, __pyx_nargs); __PYX_ERR(4, 13, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6496,7 +6496,7 @@ static int __pyx_pf_6master_10PyMultiply___init__(struct __pyx_obj_6master_PyMul
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
 
-  /* "Multiply_wrapper.pyx":12
+  /* "Multiply_wrapper.pyx":14
  * 
  *     def __init__(self, double factor1, double factor2):
  *         self.multiply_inst = Multiply(factor1, factor2)             # <<<<<<<<<<<<<<
@@ -6507,12 +6507,12 @@ static int __pyx_pf_6master_10PyMultiply___init__(struct __pyx_obj_6master_PyMul
     __pyx_t_1 = math::Multiply(__pyx_v_factor1, __pyx_v_factor2);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(4, 12, __pyx_L1_error)
+    __PYX_ERR(4, 14, __pyx_L1_error)
   }
   __pyx_v_self->multiply_inst = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_1);
 
-  /* "Multiply_wrapper.pyx":11
- *     cdef Multiply multiply_inst  # Hold a C++ instance which we're wrapping
+  /* "Multiply_wrapper.pyx":13
+ * 
  * 
  *     def __init__(self, double factor1, double factor2):             # <<<<<<<<<<<<<<
  *         self.multiply_inst = Multiply(factor1, factor2)
@@ -6529,7 +6529,7 @@ static int __pyx_pf_6master_10PyMultiply___init__(struct __pyx_obj_6master_PyMul
   return __pyx_r;
 }
 
-/* "Multiply_wrapper.pyx":14
+/* "Multiply_wrapper.pyx":16
  *         self.multiply_inst = Multiply(factor1, factor2)
  * 
  *     def getFactor1(self):             # <<<<<<<<<<<<<<
@@ -6587,7 +6587,7 @@ static PyObject *__pyx_pf_6master_10PyMultiply_2getFactor1(struct __pyx_obj_6mas
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getFactor1", 1);
 
-  /* "Multiply_wrapper.pyx":15
+  /* "Multiply_wrapper.pyx":17
  * 
  *     def getFactor1(self):
  *         return self.multiply_inst.getFactor1()             # <<<<<<<<<<<<<<
@@ -6595,13 +6595,13 @@ static PyObject *__pyx_pf_6master_10PyMultiply_2getFactor1(struct __pyx_obj_6mas
  *     def getFactor2(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->multiply_inst.getFactor1()); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->multiply_inst.getFactor1()); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "Multiply_wrapper.pyx":14
+  /* "Multiply_wrapper.pyx":16
  *         self.multiply_inst = Multiply(factor1, factor2)
  * 
  *     def getFactor1(self):             # <<<<<<<<<<<<<<
@@ -6620,7 +6620,7 @@ static PyObject *__pyx_pf_6master_10PyMultiply_2getFactor1(struct __pyx_obj_6mas
   return __pyx_r;
 }
 
-/* "Multiply_wrapper.pyx":17
+/* "Multiply_wrapper.pyx":19
  *         return self.multiply_inst.getFactor1()
  * 
  *     def getFactor2(self):             # <<<<<<<<<<<<<<
@@ -6678,21 +6678,21 @@ static PyObject *__pyx_pf_6master_10PyMultiply_4getFactor2(struct __pyx_obj_6mas
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getFactor2", 1);
 
-  /* "Multiply_wrapper.pyx":18
+  /* "Multiply_wrapper.pyx":20
  * 
  *     def getFactor2(self):
  *         return self.multiply_inst.getFactor2()             # <<<<<<<<<<<<<<
  * 
- *     def setFactors(self, factor1, factor2):
+ *     # def getFactors(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->multiply_inst.getFactor2()); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 18, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->multiply_inst.getFactor2()); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "Multiply_wrapper.pyx":17
+  /* "Multiply_wrapper.pyx":19
  *         return self.multiply_inst.getFactor1()
  * 
  *     def getFactor2(self):             # <<<<<<<<<<<<<<
@@ -6711,8 +6711,8 @@ static PyObject *__pyx_pf_6master_10PyMultiply_4getFactor2(struct __pyx_obj_6mas
   return __pyx_r;
 }
 
-/* "Multiply_wrapper.pyx":20
- *         return self.multiply_inst.getFactor2()
+/* "Multiply_wrapper.pyx":27
+ *     #     return numpy_array
  * 
  *     def setFactors(self, factor1, factor2):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.setFactors(factor1, factor2)
@@ -6775,7 +6775,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(4, 20, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(4, 27, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -6783,14 +6783,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(4, 20, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(4, 27, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("setFactors", 1, 2, 2, 1); __PYX_ERR(4, 20, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("setFactors", 1, 2, 2, 1); __PYX_ERR(4, 27, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "setFactors") < 0)) __PYX_ERR(4, 20, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "setFactors") < 0)) __PYX_ERR(4, 27, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -6803,7 +6803,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("setFactors", 1, 2, 2, __pyx_nargs); __PYX_ERR(4, 20, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("setFactors", 1, 2, 2, __pyx_nargs); __PYX_ERR(4, 27, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6841,7 +6841,7 @@ static PyObject *__pyx_pf_6master_10PyMultiply_6setFactors(struct __pyx_obj_6mas
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("setFactors", 1);
 
-  /* "Multiply_wrapper.pyx":21
+  /* "Multiply_wrapper.pyx":28
  * 
  *     def setFactors(self, factor1, factor2):
  *         return self.multiply_inst.setFactors(factor1, factor2)             # <<<<<<<<<<<<<<
@@ -6849,16 +6849,16 @@ static PyObject *__pyx_pf_6master_10PyMultiply_6setFactors(struct __pyx_obj_6mas
  *     def multiply(self, factor1, factor2):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_factor1); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(4, 21, __pyx_L1_error)
-  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_factor2); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(4, 21, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_void_to_None(__pyx_v_self->multiply_inst.setFactors(__pyx_t_1, __pyx_t_2)); if (unlikely(!__pyx_t_3)) __PYX_ERR(4, 21, __pyx_L1_error)
+  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_factor1); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(4, 28, __pyx_L1_error)
+  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_factor2); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(4, 28, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_void_to_None(__pyx_v_self->multiply_inst.setFactors(__pyx_t_1, __pyx_t_2)); if (unlikely(!__pyx_t_3)) __PYX_ERR(4, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "Multiply_wrapper.pyx":20
- *         return self.multiply_inst.getFactor2()
+  /* "Multiply_wrapper.pyx":27
+ *     #     return numpy_array
  * 
  *     def setFactors(self, factor1, factor2):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.setFactors(factor1, factor2)
@@ -6876,7 +6876,7 @@ static PyObject *__pyx_pf_6master_10PyMultiply_6setFactors(struct __pyx_obj_6mas
   return __pyx_r;
 }
 
-/* "Multiply_wrapper.pyx":23
+/* "Multiply_wrapper.pyx":30
  *         return self.multiply_inst.setFactors(factor1, factor2)
  * 
  *     def multiply(self, factor1, factor2):             # <<<<<<<<<<<<<<
@@ -6940,7 +6940,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(4, 23, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(4, 30, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -6948,14 +6948,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(4, 23, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(4, 30, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("multiply", 1, 2, 2, 1); __PYX_ERR(4, 23, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("multiply", 1, 2, 2, 1); __PYX_ERR(4, 30, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "multiply") < 0)) __PYX_ERR(4, 23, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "multiply") < 0)) __PYX_ERR(4, 30, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -6968,7 +6968,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("multiply", 1, 2, 2, __pyx_nargs); __PYX_ERR(4, 23, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("multiply", 1, 2, 2, __pyx_nargs); __PYX_ERR(4, 30, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7006,7 +7006,7 @@ static PyObject *__pyx_pf_6master_10PyMultiply_8multiply(struct __pyx_obj_6maste
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("multiply", 1);
 
-  /* "Multiply_wrapper.pyx":24
+  /* "Multiply_wrapper.pyx":31
  * 
  *     def multiply(self, factor1, factor2):
  *         return self.multiply_inst.multiply(factor1, factor2)             # <<<<<<<<<<<<<<
@@ -7014,15 +7014,15 @@ static PyObject *__pyx_pf_6master_10PyMultiply_8multiply(struct __pyx_obj_6maste
  *     def multiply(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_factor1); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(4, 24, __pyx_L1_error)
-  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_factor2); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(4, 24, __pyx_L1_error)
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->multiply_inst.multiply(__pyx_t_1, __pyx_t_2)); if (unlikely(!__pyx_t_3)) __PYX_ERR(4, 24, __pyx_L1_error)
+  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_factor1); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(4, 31, __pyx_L1_error)
+  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_factor2); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(4, 31, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->multiply_inst.multiply(__pyx_t_1, __pyx_t_2)); if (unlikely(!__pyx_t_3)) __PYX_ERR(4, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "Multiply_wrapper.pyx":23
+  /* "Multiply_wrapper.pyx":30
  *         return self.multiply_inst.setFactors(factor1, factor2)
  * 
  *     def multiply(self, factor1, factor2):             # <<<<<<<<<<<<<<
@@ -7041,7 +7041,7 @@ static PyObject *__pyx_pf_6master_10PyMultiply_8multiply(struct __pyx_obj_6maste
   return __pyx_r;
 }
 
-/* "Multiply_wrapper.pyx":26
+/* "Multiply_wrapper.pyx":33
  *         return self.multiply_inst.multiply(factor1, factor2)
  * 
  *     def multiply(self):             # <<<<<<<<<<<<<<
@@ -7098,19 +7098,19 @@ static PyObject *__pyx_pf_6master_10PyMultiply_10multiply(struct __pyx_obj_6mast
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("multiply", 1);
 
-  /* "Multiply_wrapper.pyx":27
+  /* "Multiply_wrapper.pyx":34
  * 
  *     def multiply(self):
  *         return self.multiply_inst.multiply()             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->multiply_inst.multiply()); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 27, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->multiply_inst.multiply()); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "Multiply_wrapper.pyx":26
+  /* "Multiply_wrapper.pyx":33
  *         return self.multiply_inst.multiply(factor1, factor2)
  * 
  *     def multiply(self):             # <<<<<<<<<<<<<<
@@ -7691,55 +7691,55 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__13);
   __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_npTest_pyx, __pyx_n_s_add_numpy_elements, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(1, 9, __pyx_L1_error)
 
-  /* "Multiply_wrapper.pyx":14
+  /* "Multiply_wrapper.pyx":16
  *         self.multiply_inst = Multiply(factor1, factor2)
  * 
  *     def getFactor1(self):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.getFactor1()
  * 
  */
-  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(4, 14, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(4, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_getFactor1, 14, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(4, 14, __pyx_L1_error)
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_getFactor1, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(4, 16, __pyx_L1_error)
 
-  /* "Multiply_wrapper.pyx":17
+  /* "Multiply_wrapper.pyx":19
  *         return self.multiply_inst.getFactor1()
  * 
  *     def getFactor2(self):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.getFactor2()
  * 
  */
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_getFactor2, 17, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(4, 17, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_getFactor2, 19, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(4, 19, __pyx_L1_error)
 
-  /* "Multiply_wrapper.pyx":20
- *         return self.multiply_inst.getFactor2()
+  /* "Multiply_wrapper.pyx":27
+ *     #     return numpy_array
  * 
  *     def setFactors(self, factor1, factor2):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.setFactors(factor1, factor2)
  * 
  */
-  __pyx_tuple__18 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_factor1, __pyx_n_s_factor2); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(4, 20, __pyx_L1_error)
+  __pyx_tuple__18 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_factor1, __pyx_n_s_factor2); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(4, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__18);
   __Pyx_GIVEREF(__pyx_tuple__18);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_setFactors, 20, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(4, 20, __pyx_L1_error)
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_setFactors, 27, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(4, 27, __pyx_L1_error)
 
-  /* "Multiply_wrapper.pyx":23
+  /* "Multiply_wrapper.pyx":30
  *         return self.multiply_inst.setFactors(factor1, factor2)
  * 
  *     def multiply(self, factor1, factor2):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.multiply(factor1, factor2)
  * 
  */
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_multiply, 23, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(4, 23, __pyx_L1_error)
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_multiply, 30, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(4, 30, __pyx_L1_error)
 
-  /* "Multiply_wrapper.pyx":26
+  /* "Multiply_wrapper.pyx":33
  *         return self.multiply_inst.multiply(factor1, factor2)
  * 
  *     def multiply(self):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.multiply()
  */
-  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_multiply, 26, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(4, 26, __pyx_L1_error)
+  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_multiply, 33, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(4, 33, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
@@ -7843,15 +7843,15 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_ptype_6master_PyMultiply = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_6master_PyMultiply_spec, NULL); if (unlikely(!__pyx_ptype_6master_PyMultiply)) __PYX_ERR(4, 8, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_6master_PyMultiply_spec, __pyx_ptype_6master_PyMultiply) < 0) __PYX_ERR(4, 8, __pyx_L1_error)
+  __pyx_ptype_6master_PyMultiply = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_6master_PyMultiply_spec, NULL); if (unlikely(!__pyx_ptype_6master_PyMultiply)) __PYX_ERR(4, 9, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_6master_PyMultiply_spec, __pyx_ptype_6master_PyMultiply) < 0) __PYX_ERR(4, 9, __pyx_L1_error)
   #else
   __pyx_ptype_6master_PyMultiply = &__pyx_type_6master_PyMultiply;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_ptype_6master_PyMultiply) < 0) __PYX_ERR(4, 8, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_ptype_6master_PyMultiply) < 0) __PYX_ERR(4, 9, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
   __pyx_ptype_6master_PyMultiply->tp_print = 0;
@@ -7861,9 +7861,9 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_ptype_6master_PyMultiply->tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
   #endif
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PyMultiply, (PyObject *) __pyx_ptype_6master_PyMultiply) < 0) __PYX_ERR(4, 8, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PyMultiply, (PyObject *) __pyx_ptype_6master_PyMultiply) < 0) __PYX_ERR(4, 9, __pyx_L1_error)
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_6master_PyMultiply) < 0) __PYX_ERR(4, 8, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_6master_PyMultiply) < 0) __PYX_ERR(4, 9, __pyx_L1_error)
   #endif
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -8306,67 +8306,67 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_add_numpy_elements, __pyx_t_2) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Multiply_wrapper.pyx":14
+  /* "Multiply_wrapper.pyx":16
  *         self.multiply_inst = Multiply(factor1, factor2)
  * 
  *     def getFactor1(self):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.getFactor1()
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_3getFactor1, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_getFactor1, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 14, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_3getFactor1, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_getFactor1, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_getFactor1, __pyx_t_2) < 0) __PYX_ERR(4, 14, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_getFactor1, __pyx_t_2) < 0) __PYX_ERR(4, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6master_PyMultiply);
 
-  /* "Multiply_wrapper.pyx":17
+  /* "Multiply_wrapper.pyx":19
  *         return self.multiply_inst.getFactor1()
  * 
  *     def getFactor2(self):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.getFactor2()
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_5getFactor2, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_getFactor2, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 17, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_5getFactor2, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_getFactor2, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_getFactor2, __pyx_t_2) < 0) __PYX_ERR(4, 17, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_getFactor2, __pyx_t_2) < 0) __PYX_ERR(4, 19, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6master_PyMultiply);
 
-  /* "Multiply_wrapper.pyx":20
- *         return self.multiply_inst.getFactor2()
+  /* "Multiply_wrapper.pyx":27
+ *     #     return numpy_array
  * 
  *     def setFactors(self, factor1, factor2):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.setFactors(factor1, factor2)
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_7setFactors, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_setFactors, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 20, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_7setFactors, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_setFactors, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_setFactors, __pyx_t_2) < 0) __PYX_ERR(4, 20, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_setFactors, __pyx_t_2) < 0) __PYX_ERR(4, 27, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6master_PyMultiply);
 
-  /* "Multiply_wrapper.pyx":23
+  /* "Multiply_wrapper.pyx":30
  *         return self.multiply_inst.setFactors(factor1, factor2)
  * 
  *     def multiply(self, factor1, factor2):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.multiply(factor1, factor2)
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_9multiply, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_multiply, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 23, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_9multiply, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_multiply, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_multiply, __pyx_t_2) < 0) __PYX_ERR(4, 23, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_multiply, __pyx_t_2) < 0) __PYX_ERR(4, 30, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6master_PyMultiply);
 
-  /* "Multiply_wrapper.pyx":26
+  /* "Multiply_wrapper.pyx":33
  *         return self.multiply_inst.multiply(factor1, factor2)
  * 
  *     def multiply(self):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.multiply()
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_11multiply, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_multiply, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 26, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_11multiply, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_multiply, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_multiply, __pyx_t_2) < 0) __PYX_ERR(4, 26, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_multiply, __pyx_t_2) < 0) __PYX_ERR(4, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6master_PyMultiply);
 

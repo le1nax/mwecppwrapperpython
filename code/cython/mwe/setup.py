@@ -7,6 +7,10 @@
 from setuptools import setup, Extension
 from Cython.Build import cythonize
 import numpy as np
+import os
+
+os.environ["CPP"] = "clang++"# C++ compiler
+os.environ["CPPFLAGS"] = "-std=c++20"# specify c++ version
 
 # TODO this is not working!
 # extensions = [

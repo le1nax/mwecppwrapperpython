@@ -1,3 +1,5 @@
+import numpy as np
+cimport numpy as cnp
 # This includes the Multiply.cpp
 # Alternatively, add the expression in brackets to the top of the .pyx file: (# distutils: sources = Rectangle.cpp)
 cdef extern from "Multiply.cpp":# path relative to the setup.py file
@@ -12,6 +14,6 @@ cdef extern from "Multiply.hpp" namespace "math":
         double getFactor1()
         double getFactor2()
         void setFactors(double factor1, double factor2)
-        #std::vector<double> getFactors(double factor1, double factor2)
+        # cnp.ndarray getFactors()
         double multiply(double factor1, double factor2)
         double multiply()

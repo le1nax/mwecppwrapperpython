@@ -22,6 +22,7 @@ print("Cython is {}x faster".format(pythonTime/cythonTime))
 ## C++ class API test
 multiply_obj = mwe.PyMultiply(1.5, 3)
 multiply_obj = mwe.PyMultiply(1.5, 3)
+print(multiply_obj.getFactors())
 print(multiply_obj.multiply())
 print(dir(multiply_obj))
 
