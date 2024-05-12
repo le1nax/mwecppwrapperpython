@@ -1,7 +1,9 @@
 import timeit
+import numpy as np
 # import pyximport; pyximport.install(pyimport=True)
 # import mwe
-import Multiply_wrapper
+# import Multiply_wrapper
+import npTest
 
 
 # add_result = mwe.add(2,3)
@@ -25,7 +27,11 @@ import Multiply_wrapper
 # print("cythonTime=" + str(cythonTime))
 # print("Cython is {}x faster".format(pythonTime/cythonTime))
 
-# C++ class API test
-multiply_obj = Multiply_wrapper.PyMultiply(1.5, 3)
-print(multiply_obj.multiply())
-print(dir(multiply_obj))
+# # C++ class API test
+# multiply_obj = Multiply_wrapper.PyMultiply(1.5, 3)
+# print(multiply_obj.multiply())
+# print(dir(multiply_obj))
+
+# Testing numpy interface
+newArray = npTest.add_numpy_elements(np.array([[1, 2, 3]]))
+print(str(newArray) + ", type=" + str(type(newArray)))

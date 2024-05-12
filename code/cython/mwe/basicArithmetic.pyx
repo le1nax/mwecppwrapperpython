@@ -1,19 +1,7 @@
+# distutils: language = c++
+
 import cython
 
-
-
-# # basic arithmetic functions using pure python syntax
-# def add(x: cython.double, y: cython.double):
-#     return x+y
-
-# def sub(x: cython.double, y: cython.double):
-#     return x-y
-
-# def mul(x: cython.double, y: cython.double):
-#     return x*y
-
-# def div(x: cython.double, y: cython.double):
-#     return x/y
 
 # basic arithmetic functions using cython syntax
 cpdef double add(double x, double y) except *:

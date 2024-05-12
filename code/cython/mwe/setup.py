@@ -6,13 +6,20 @@
 
 from setuptools import setup, Extension
 from Cython.Build import cythonize
+import numpy as np
 
+# TODO this is not working!
 # extensions = [
 #     Extension("mwe", ["basicArithmetic.pyx", "Multiply_wrapper.pyx"], language="c++")
 # ]
 
+# extensions = [
+#     Extension("Multiply_wrapper", ["Multiply_wrapper.pyx"], language="c++")
+# ]
+
 extensions = [
-    Extension("Multiply_wrapper", ["Multiply_wrapper.pyx"], language="c++")
+    Extension("npTest", ["npTest.pyx"],
+              include_dirs=[np.get_include()], language="c++")
 ]
 
 setup(
