@@ -1,5 +1,6 @@
 import sys
 import os
+import cv2
 
 # Get the directory of the current script
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -14,4 +15,12 @@ print("Result of addFloat:", result)
 
 testClass = TestClass(5)
 
+print(testClass.multiply_list([1, 3, 10]))
+
 print(testClass.multiply(2))
+
+print(testClass.image)
+
+print(testClass.image.shape)
+
+cv2.imwrite("/tmp/test.png", testClass.image)
