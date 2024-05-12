@@ -10,16 +10,36 @@ import numpy as np
 
 # TODO this is not working!
 # extensions = [
-#     Extension("mwe", ["basicArithmetic.pyx", "Multiply_wrapper.pyx"], language="c++")
+#     Extension("*", ["basicArithmetic.pyx", "Multiply_wrapper.pyx"])
 # ]
 
 # extensions = [
 #     Extension("Multiply_wrapper", ["Multiply_wrapper.pyx"], language="c++")
 # ]
 
+# extensions = [
+#     Extension("npTest", ["npTest.pyx"],
+#               include_dirs=[np.get_include()], language="c++")
+# ]
+
+# # This causes two .so to be created and works:
+# extensions = [
+#     Extension("basicArithmetic", ["basicArithmetic.pyx"]),
+#     Extension("Multiply_wrapper", ["Multiply_wrapper.pyx"]),
+# ]
+
+# # Include everything - separate .so for every .pyx file will be created:
+# extensions = [
+#     Extension("*", ["*.pyx"],
+#               include_dirs=[np.get_include()],),
+# ]
+
+# Include a master file which includes all .pyx files. This generates one module named master:
 extensions = [
-    Extension("npTest", ["npTest.pyx"],
-              include_dirs=[np.get_include()], language="c++")
+    Extension("master",# important: module name has to be the same as the .pyx file, otherwise ImportError
+              ["master.pyx"],
+              include_dirs=[np.get_include()],
+              language="c++",),
 ]
 
 setup(

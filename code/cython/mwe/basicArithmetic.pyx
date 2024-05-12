@@ -1,5 +1,4 @@
 # distutils: language = c++
-
 import cython
 
 
