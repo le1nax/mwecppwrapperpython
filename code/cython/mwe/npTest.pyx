@@ -2,11 +2,11 @@ import numpy as np
 cimport numpy as cnp
 cimport cython
 
-ctypedef cnp.int_t DTYPE_t# assigns a compile-time type to DTYPE_t
+ctypedef cnp.int_t DTYPE_INT_t# assigns a compile-time type to DTYPE_t
 
 @cython.boundscheck(False) # turn off bounds-checking for entire function
 @cython.wraparound(False)  # turn off negative index wrapping for entire function
-cpdef cnp.ndarray add_numpy_elements(cnp.ndarray[dtype=DTYPE_t, ndim=2] arr):
+cpdef cnp.ndarray add_numpy_elements(cnp.ndarray[dtype=DTYPE_INT_t, ndim=2] arr):
     cdef unsigned long long int total = 0# initialisation important here!
     cdef int k
     cdef int i

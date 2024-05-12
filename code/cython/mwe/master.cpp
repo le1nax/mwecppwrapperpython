@@ -1529,6 +1529,7 @@ static const char *__pyx_f[] = {
   "<stringsource>",
   "__init__.cython-30.pxd",
   "Multiply_wrapper.pyx",
+  "matrixManipulation.pyx",
   "master.pyx",
   "type.pxd",
 };
@@ -1749,11 +1750,20 @@ typedef npy_longdouble __pyx_t_5numpy_longdouble_t;
 /* "npTest.pyx":5
  * cimport cython
  * 
- * ctypedef cnp.int_t DTYPE_t# assigns a compile-time type to DTYPE_t             # <<<<<<<<<<<<<<
+ * ctypedef cnp.int_t DTYPE_INT_t# assigns a compile-time type to DTYPE_t             # <<<<<<<<<<<<<<
  * 
  * @cython.boundscheck(False) # turn off bounds-checking for entire function
  */
-typedef __pyx_t_5numpy_int_t __pyx_t_6master_DTYPE_t;
+typedef __pyx_t_5numpy_int_t __pyx_t_6master_DTYPE_INT_t;
+
+/* "matrixManipulation.pyx":5
+ * cimport cython
+ * 
+ * ctypedef cnp.uint64_t DTYPE_UINT64_t# assigns a compile-time type to DTYPE_t             # <<<<<<<<<<<<<<
+ * 
+ * @cython.boundscheck(False) # turn off bounds-checking for entire function
+ */
+typedef __pyx_t_5numpy_uint64_t __pyx_t_6master_DTYPE_UINT64_t;
 /* #### Code section: complex_type_declarations ### */
 /* Declarations.proto */
 #if CYTHON_CCOMPLEX && (1) && (!0 || __cplusplus)
@@ -2257,6 +2267,7 @@ static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *nam
 /* KeywordStringCheck.proto */
 static int __Pyx_CheckKeywordStrings(PyObject *kw, const char* function_name, int kw_allowed);
 
+#define __Pyx_BufPtrStrided3d(type, buf, i0, s0, i1, s1, i2, s2) (type)((char*)buf + i0 * s0 + i1 * s1 + i2 * s2)
 /* IncludeStructmemberH.proto */
 #include <structmember.h>
 
@@ -2764,8 +2775,10 @@ static double __pyx_f_6master_mul(double, double, int __pyx_skip_dispatch); /*pr
 static double __pyx_f_6master_div(double, double, int __pyx_skip_dispatch); /*proto*/
 static unsigned PY_LONG_LONG __pyx_f_6master_sum_of_first_n_numbers_cy(unsigned PY_LONG_LONG, int __pyx_skip_dispatch); /*proto*/
 static PyArrayObject *__pyx_f_6master_add_numpy_elements(PyArrayObject *, int __pyx_skip_dispatch); /*proto*/
+static PyArrayObject *__pyx_f_6master_multiply3DmatricesCython(PyArrayObject *, PyArrayObject *, int __pyx_skip_dispatch); /*proto*/
 /* #### Code section: typeinfo ### */
-static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_6master_DTYPE_t = { "DTYPE_t", NULL, sizeof(__pyx_t_6master_DTYPE_t), { 0 }, 0, __PYX_IS_UNSIGNED(__pyx_t_6master_DTYPE_t) ? 'U' : 'I', __PYX_IS_UNSIGNED(__pyx_t_6master_DTYPE_t), 0 };
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_6master_DTYPE_INT_t = { "DTYPE_INT_t", NULL, sizeof(__pyx_t_6master_DTYPE_INT_t), { 0 }, 0, __PYX_IS_UNSIGNED(__pyx_t_6master_DTYPE_INT_t) ? 'U' : 'I', __PYX_IS_UNSIGNED(__pyx_t_6master_DTYPE_INT_t), 0 };
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_6master_DTYPE_UINT64_t = { "DTYPE_UINT64_t", NULL, sizeof(__pyx_t_6master_DTYPE_UINT64_t), { 0 }, 0, __PYX_IS_UNSIGNED(__pyx_t_6master_DTYPE_UINT64_t) ? 'U' : 'I', __PYX_IS_UNSIGNED(__pyx_t_6master_DTYPE_UINT64_t), 0 };
 /* #### Code section: before_global_var ### */
 #define __Pyx_MODULE_NAME "master"
 extern int __pyx_module_is_main_master;
@@ -2783,13 +2796,15 @@ static const char __pyx_k_x[] = "x";
 static const char __pyx_k_y[] = "y";
 static const char __pyx_k_gc[] = "gc";
 static const char __pyx_k_np[] = "np";
-static const char __pyx_k__12[] = "*";
-static const char __pyx_k__25[] = "?";
+static const char __pyx_k__13[] = "*";
+static const char __pyx_k__28[] = "?";
 static const char __pyx_k_add[] = "add";
 static const char __pyx_k_arr[] = "arr";
 static const char __pyx_k_div[] = "div";
 static const char __pyx_k_mul[] = "mul";
 static const char __pyx_k_sub[] = "sub";
+static const char __pyx_k_arr1[] = "arr1";
+static const char __pyx_k_arr2[] = "arr2";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_self[] = "self";
@@ -2829,6 +2844,7 @@ static const char __pyx_k_class_getitem[] = "__class_getitem__";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_add_numpy_elements[] = "add_numpy_elements";
+static const char __pyx_k_and_from_array2_is[] = ", and from array2 is ";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_PyMultiply_multiply[] = "PyMultiply.multiply";
@@ -2838,12 +2854,16 @@ static const char __pyx_k_arr_arr_shape_dim0_k[] = "arr[arr_shape_dim0,k]=";
 static const char __pyx_k_PyMultiply_getFactor1[] = "PyMultiply.getFactor1";
 static const char __pyx_k_PyMultiply_getFactor2[] = "PyMultiply.getFactor2";
 static const char __pyx_k_PyMultiply_setFactors[] = "PyMultiply.setFactors";
+static const char __pyx_k_matrixManipulation_pyx[] = "matrixManipulation.pyx";
+static const char __pyx_k_multiply3DmatricesCython[] = "multiply3DmatricesCython";
 static const char __pyx_k_sum_of_first_n_numbers_cy[] = "sum_of_first_n_numbers_cy";
 static const char __pyx_k_sum_of_first_n_numbers_py[] = "sum_of_first_n_numbers_py";
 static const char __pyx_k_PyMultiply___reduce_cython[] = "PyMultiply.__reduce_cython__";
 static const char __pyx_k_PyMultiply___setstate_cython[] = "PyMultiply.__setstate_cython__";
 static const char __pyx_k_returnArray_arr_shape_dim0_i[] = "returnArray[arr_shape_dim0,i]=";
+static const char __pyx_k_Dimension_error_Third_dimension[] = "Dimension error: Third dimension from array1 is ";
 static const char __pyx_k_numpy_core_multiarray_failed_to[] = "numpy.core.multiarray failed to import";
+static const char __pyx_k_Dimension_error_dimensions_do_no[] = "Dimension error: dimensions do not match!";
 static const char __pyx_k_numpy_core_umath_failed_to_impor[] = "numpy.core.umath failed to import";
 static const char __pyx_k_self_multiply_inst_cannot_be_con[] = "self.multiply_inst cannot be converted to a Python object for pickling";
 /* #### Code section: decls ### */
@@ -2862,6 +2882,7 @@ static PyObject *__pyx_pf_6master_10PyMultiply_8multiply(struct __pyx_obj_6maste
 static PyObject *__pyx_pf_6master_10PyMultiply_10multiply(struct __pyx_obj_6master_PyMultiply *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6master_10PyMultiply_12__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_6master_PyMultiply *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6master_10PyMultiply_14__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_6master_PyMultiply *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_6master_14multiply3DmatricesCython(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_arr1, PyArrayObject *__pyx_v_arr2); /* proto */
 static PyObject *__pyx_tp_new_6master_PyMultiply(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
@@ -2932,6 +2953,8 @@ typedef struct {
   PyObject *__pyx_type_6master_PyMultiply;
   #endif
   PyTypeObject *__pyx_ptype_6master_PyMultiply;
+  PyObject *__pyx_kp_s_Dimension_error_Third_dimension;
+  PyObject *__pyx_kp_s_Dimension_error_dimensions_do_no;
   PyObject *__pyx_n_s_ImportError;
   PyObject *__pyx_kp_s_Multiply_wrapper_pyx;
   PyObject *__pyx_n_s_PyMultiply;
@@ -2942,11 +2965,14 @@ typedef struct {
   PyObject *__pyx_n_s_PyMultiply_multiply;
   PyObject *__pyx_n_s_PyMultiply_setFactors;
   PyObject *__pyx_n_s_TypeError;
-  PyObject *__pyx_n_s__12;
-  PyObject *__pyx_n_s__25;
+  PyObject *__pyx_n_s__13;
+  PyObject *__pyx_n_s__28;
   PyObject *__pyx_n_s_add;
   PyObject *__pyx_n_s_add_numpy_elements;
+  PyObject *__pyx_kp_s_and_from_array2_is;
   PyObject *__pyx_n_s_arr;
+  PyObject *__pyx_n_s_arr1;
+  PyObject *__pyx_n_s_arr2;
   PyObject *__pyx_kp_s_arr_arr_shape_dim0_k;
   PyObject *__pyx_n_s_asyncio_coroutines;
   PyObject *__pyx_kp_s_basicArithmetic_pyx;
@@ -2969,8 +2995,10 @@ typedef struct {
   PyObject *__pyx_kp_u_isenabled;
   PyObject *__pyx_n_s_main;
   PyObject *__pyx_n_s_master;
+  PyObject *__pyx_kp_s_matrixManipulation_pyx;
   PyObject *__pyx_n_s_mul;
   PyObject *__pyx_n_s_multiply;
+  PyObject *__pyx_n_s_multiply3DmatricesCython;
   PyObject *__pyx_n_s_name;
   PyObject *__pyx_n_s_np;
   PyObject *__pyx_kp_s_npTest_pyx;
@@ -3006,26 +3034,29 @@ typedef struct {
   PyObject *__pyx_tuple_;
   PyObject *__pyx_tuple__2;
   PyObject *__pyx_tuple__3;
-  PyObject *__pyx_tuple__8;
-  PyObject *__pyx_tuple__10;
-  PyObject *__pyx_tuple__13;
-  PyObject *__pyx_tuple__15;
-  PyObject *__pyx_tuple__18;
-  PyObject *__pyx_tuple__23;
-  PyObject *__pyx_codeobj__4;
+  PyObject *__pyx_tuple__4;
+  PyObject *__pyx_tuple__9;
+  PyObject *__pyx_tuple__11;
+  PyObject *__pyx_tuple__14;
+  PyObject *__pyx_tuple__16;
+  PyObject *__pyx_tuple__19;
+  PyObject *__pyx_tuple__24;
+  PyObject *__pyx_tuple__26;
   PyObject *__pyx_codeobj__5;
   PyObject *__pyx_codeobj__6;
   PyObject *__pyx_codeobj__7;
-  PyObject *__pyx_codeobj__9;
-  PyObject *__pyx_codeobj__11;
-  PyObject *__pyx_codeobj__14;
-  PyObject *__pyx_codeobj__16;
+  PyObject *__pyx_codeobj__8;
+  PyObject *__pyx_codeobj__10;
+  PyObject *__pyx_codeobj__12;
+  PyObject *__pyx_codeobj__15;
   PyObject *__pyx_codeobj__17;
-  PyObject *__pyx_codeobj__19;
+  PyObject *__pyx_codeobj__18;
   PyObject *__pyx_codeobj__20;
   PyObject *__pyx_codeobj__21;
   PyObject *__pyx_codeobj__22;
-  PyObject *__pyx_codeobj__24;
+  PyObject *__pyx_codeobj__23;
+  PyObject *__pyx_codeobj__25;
+  PyObject *__pyx_codeobj__27;
 } __pyx_mstate;
 
 #if CYTHON_USE_MODULE_STATE
@@ -3086,6 +3117,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_ufunc);
   Py_CLEAR(clear_module_state->__pyx_ptype_6master_PyMultiply);
   Py_CLEAR(clear_module_state->__pyx_type_6master_PyMultiply);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_Dimension_error_Third_dimension);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_Dimension_error_dimensions_do_no);
   Py_CLEAR(clear_module_state->__pyx_n_s_ImportError);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Multiply_wrapper_pyx);
   Py_CLEAR(clear_module_state->__pyx_n_s_PyMultiply);
@@ -3096,11 +3129,14 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_PyMultiply_multiply);
   Py_CLEAR(clear_module_state->__pyx_n_s_PyMultiply_setFactors);
   Py_CLEAR(clear_module_state->__pyx_n_s_TypeError);
-  Py_CLEAR(clear_module_state->__pyx_n_s__12);
-  Py_CLEAR(clear_module_state->__pyx_n_s__25);
+  Py_CLEAR(clear_module_state->__pyx_n_s__13);
+  Py_CLEAR(clear_module_state->__pyx_n_s__28);
   Py_CLEAR(clear_module_state->__pyx_n_s_add);
   Py_CLEAR(clear_module_state->__pyx_n_s_add_numpy_elements);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_and_from_array2_is);
   Py_CLEAR(clear_module_state->__pyx_n_s_arr);
+  Py_CLEAR(clear_module_state->__pyx_n_s_arr1);
+  Py_CLEAR(clear_module_state->__pyx_n_s_arr2);
   Py_CLEAR(clear_module_state->__pyx_kp_s_arr_arr_shape_dim0_k);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
   Py_CLEAR(clear_module_state->__pyx_kp_s_basicArithmetic_pyx);
@@ -3123,8 +3159,10 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_isenabled);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
   Py_CLEAR(clear_module_state->__pyx_n_s_master);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_matrixManipulation_pyx);
   Py_CLEAR(clear_module_state->__pyx_n_s_mul);
   Py_CLEAR(clear_module_state->__pyx_n_s_multiply);
+  Py_CLEAR(clear_module_state->__pyx_n_s_multiply3DmatricesCython);
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
   Py_CLEAR(clear_module_state->__pyx_n_s_np);
   Py_CLEAR(clear_module_state->__pyx_kp_s_npTest_pyx);
@@ -3160,26 +3198,29 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_tuple_);
   Py_CLEAR(clear_module_state->__pyx_tuple__2);
   Py_CLEAR(clear_module_state->__pyx_tuple__3);
-  Py_CLEAR(clear_module_state->__pyx_tuple__8);
-  Py_CLEAR(clear_module_state->__pyx_tuple__10);
-  Py_CLEAR(clear_module_state->__pyx_tuple__13);
-  Py_CLEAR(clear_module_state->__pyx_tuple__15);
-  Py_CLEAR(clear_module_state->__pyx_tuple__18);
-  Py_CLEAR(clear_module_state->__pyx_tuple__23);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__4);
+  Py_CLEAR(clear_module_state->__pyx_tuple__4);
+  Py_CLEAR(clear_module_state->__pyx_tuple__9);
+  Py_CLEAR(clear_module_state->__pyx_tuple__11);
+  Py_CLEAR(clear_module_state->__pyx_tuple__14);
+  Py_CLEAR(clear_module_state->__pyx_tuple__16);
+  Py_CLEAR(clear_module_state->__pyx_tuple__19);
+  Py_CLEAR(clear_module_state->__pyx_tuple__24);
+  Py_CLEAR(clear_module_state->__pyx_tuple__26);
   Py_CLEAR(clear_module_state->__pyx_codeobj__5);
   Py_CLEAR(clear_module_state->__pyx_codeobj__6);
   Py_CLEAR(clear_module_state->__pyx_codeobj__7);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__9);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__11);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__14);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__16);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__8);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__10);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__12);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__15);
   Py_CLEAR(clear_module_state->__pyx_codeobj__17);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__19);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__18);
   Py_CLEAR(clear_module_state->__pyx_codeobj__20);
   Py_CLEAR(clear_module_state->__pyx_codeobj__21);
   Py_CLEAR(clear_module_state->__pyx_codeobj__22);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__24);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__23);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__25);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__27);
   return 0;
 }
 #endif
@@ -3218,6 +3259,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_ufunc);
   Py_VISIT(traverse_module_state->__pyx_ptype_6master_PyMultiply);
   Py_VISIT(traverse_module_state->__pyx_type_6master_PyMultiply);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_Dimension_error_Third_dimension);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_Dimension_error_dimensions_do_no);
   Py_VISIT(traverse_module_state->__pyx_n_s_ImportError);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Multiply_wrapper_pyx);
   Py_VISIT(traverse_module_state->__pyx_n_s_PyMultiply);
@@ -3228,11 +3271,14 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_PyMultiply_multiply);
   Py_VISIT(traverse_module_state->__pyx_n_s_PyMultiply_setFactors);
   Py_VISIT(traverse_module_state->__pyx_n_s_TypeError);
-  Py_VISIT(traverse_module_state->__pyx_n_s__12);
-  Py_VISIT(traverse_module_state->__pyx_n_s__25);
+  Py_VISIT(traverse_module_state->__pyx_n_s__13);
+  Py_VISIT(traverse_module_state->__pyx_n_s__28);
   Py_VISIT(traverse_module_state->__pyx_n_s_add);
   Py_VISIT(traverse_module_state->__pyx_n_s_add_numpy_elements);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_and_from_array2_is);
   Py_VISIT(traverse_module_state->__pyx_n_s_arr);
+  Py_VISIT(traverse_module_state->__pyx_n_s_arr1);
+  Py_VISIT(traverse_module_state->__pyx_n_s_arr2);
   Py_VISIT(traverse_module_state->__pyx_kp_s_arr_arr_shape_dim0_k);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
   Py_VISIT(traverse_module_state->__pyx_kp_s_basicArithmetic_pyx);
@@ -3255,8 +3301,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_isenabled);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
   Py_VISIT(traverse_module_state->__pyx_n_s_master);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_matrixManipulation_pyx);
   Py_VISIT(traverse_module_state->__pyx_n_s_mul);
   Py_VISIT(traverse_module_state->__pyx_n_s_multiply);
+  Py_VISIT(traverse_module_state->__pyx_n_s_multiply3DmatricesCython);
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
   Py_VISIT(traverse_module_state->__pyx_n_s_np);
   Py_VISIT(traverse_module_state->__pyx_kp_s_npTest_pyx);
@@ -3292,26 +3340,29 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_tuple_);
   Py_VISIT(traverse_module_state->__pyx_tuple__2);
   Py_VISIT(traverse_module_state->__pyx_tuple__3);
-  Py_VISIT(traverse_module_state->__pyx_tuple__8);
-  Py_VISIT(traverse_module_state->__pyx_tuple__10);
-  Py_VISIT(traverse_module_state->__pyx_tuple__13);
-  Py_VISIT(traverse_module_state->__pyx_tuple__15);
-  Py_VISIT(traverse_module_state->__pyx_tuple__18);
-  Py_VISIT(traverse_module_state->__pyx_tuple__23);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__4);
+  Py_VISIT(traverse_module_state->__pyx_tuple__4);
+  Py_VISIT(traverse_module_state->__pyx_tuple__9);
+  Py_VISIT(traverse_module_state->__pyx_tuple__11);
+  Py_VISIT(traverse_module_state->__pyx_tuple__14);
+  Py_VISIT(traverse_module_state->__pyx_tuple__16);
+  Py_VISIT(traverse_module_state->__pyx_tuple__19);
+  Py_VISIT(traverse_module_state->__pyx_tuple__24);
+  Py_VISIT(traverse_module_state->__pyx_tuple__26);
   Py_VISIT(traverse_module_state->__pyx_codeobj__5);
   Py_VISIT(traverse_module_state->__pyx_codeobj__6);
   Py_VISIT(traverse_module_state->__pyx_codeobj__7);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__9);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__11);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__14);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__16);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__8);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__10);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__12);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__15);
   Py_VISIT(traverse_module_state->__pyx_codeobj__17);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__19);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__18);
   Py_VISIT(traverse_module_state->__pyx_codeobj__20);
   Py_VISIT(traverse_module_state->__pyx_codeobj__21);
   Py_VISIT(traverse_module_state->__pyx_codeobj__22);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__24);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__23);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__25);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__27);
   return 0;
 }
 #endif
@@ -3382,6 +3433,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_type_6master_PyMultiply __pyx_mstate_global->__pyx_type_6master_PyMultiply
 #endif
 #define __pyx_ptype_6master_PyMultiply __pyx_mstate_global->__pyx_ptype_6master_PyMultiply
+#define __pyx_kp_s_Dimension_error_Third_dimension __pyx_mstate_global->__pyx_kp_s_Dimension_error_Third_dimension
+#define __pyx_kp_s_Dimension_error_dimensions_do_no __pyx_mstate_global->__pyx_kp_s_Dimension_error_dimensions_do_no
 #define __pyx_n_s_ImportError __pyx_mstate_global->__pyx_n_s_ImportError
 #define __pyx_kp_s_Multiply_wrapper_pyx __pyx_mstate_global->__pyx_kp_s_Multiply_wrapper_pyx
 #define __pyx_n_s_PyMultiply __pyx_mstate_global->__pyx_n_s_PyMultiply
@@ -3392,11 +3445,14 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_PyMultiply_multiply __pyx_mstate_global->__pyx_n_s_PyMultiply_multiply
 #define __pyx_n_s_PyMultiply_setFactors __pyx_mstate_global->__pyx_n_s_PyMultiply_setFactors
 #define __pyx_n_s_TypeError __pyx_mstate_global->__pyx_n_s_TypeError
-#define __pyx_n_s__12 __pyx_mstate_global->__pyx_n_s__12
-#define __pyx_n_s__25 __pyx_mstate_global->__pyx_n_s__25
+#define __pyx_n_s__13 __pyx_mstate_global->__pyx_n_s__13
+#define __pyx_n_s__28 __pyx_mstate_global->__pyx_n_s__28
 #define __pyx_n_s_add __pyx_mstate_global->__pyx_n_s_add
 #define __pyx_n_s_add_numpy_elements __pyx_mstate_global->__pyx_n_s_add_numpy_elements
+#define __pyx_kp_s_and_from_array2_is __pyx_mstate_global->__pyx_kp_s_and_from_array2_is
 #define __pyx_n_s_arr __pyx_mstate_global->__pyx_n_s_arr
+#define __pyx_n_s_arr1 __pyx_mstate_global->__pyx_n_s_arr1
+#define __pyx_n_s_arr2 __pyx_mstate_global->__pyx_n_s_arr2
 #define __pyx_kp_s_arr_arr_shape_dim0_k __pyx_mstate_global->__pyx_kp_s_arr_arr_shape_dim0_k
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
 #define __pyx_kp_s_basicArithmetic_pyx __pyx_mstate_global->__pyx_kp_s_basicArithmetic_pyx
@@ -3419,8 +3475,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_isenabled __pyx_mstate_global->__pyx_kp_u_isenabled
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
 #define __pyx_n_s_master __pyx_mstate_global->__pyx_n_s_master
+#define __pyx_kp_s_matrixManipulation_pyx __pyx_mstate_global->__pyx_kp_s_matrixManipulation_pyx
 #define __pyx_n_s_mul __pyx_mstate_global->__pyx_n_s_mul
 #define __pyx_n_s_multiply __pyx_mstate_global->__pyx_n_s_multiply
+#define __pyx_n_s_multiply3DmatricesCython __pyx_mstate_global->__pyx_n_s_multiply3DmatricesCython
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
 #define __pyx_n_s_np __pyx_mstate_global->__pyx_n_s_np
 #define __pyx_kp_s_npTest_pyx __pyx_mstate_global->__pyx_kp_s_npTest_pyx
@@ -3456,26 +3514,29 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_tuple_ __pyx_mstate_global->__pyx_tuple_
 #define __pyx_tuple__2 __pyx_mstate_global->__pyx_tuple__2
 #define __pyx_tuple__3 __pyx_mstate_global->__pyx_tuple__3
-#define __pyx_tuple__8 __pyx_mstate_global->__pyx_tuple__8
-#define __pyx_tuple__10 __pyx_mstate_global->__pyx_tuple__10
-#define __pyx_tuple__13 __pyx_mstate_global->__pyx_tuple__13
-#define __pyx_tuple__15 __pyx_mstate_global->__pyx_tuple__15
-#define __pyx_tuple__18 __pyx_mstate_global->__pyx_tuple__18
-#define __pyx_tuple__23 __pyx_mstate_global->__pyx_tuple__23
-#define __pyx_codeobj__4 __pyx_mstate_global->__pyx_codeobj__4
+#define __pyx_tuple__4 __pyx_mstate_global->__pyx_tuple__4
+#define __pyx_tuple__9 __pyx_mstate_global->__pyx_tuple__9
+#define __pyx_tuple__11 __pyx_mstate_global->__pyx_tuple__11
+#define __pyx_tuple__14 __pyx_mstate_global->__pyx_tuple__14
+#define __pyx_tuple__16 __pyx_mstate_global->__pyx_tuple__16
+#define __pyx_tuple__19 __pyx_mstate_global->__pyx_tuple__19
+#define __pyx_tuple__24 __pyx_mstate_global->__pyx_tuple__24
+#define __pyx_tuple__26 __pyx_mstate_global->__pyx_tuple__26
 #define __pyx_codeobj__5 __pyx_mstate_global->__pyx_codeobj__5
 #define __pyx_codeobj__6 __pyx_mstate_global->__pyx_codeobj__6
 #define __pyx_codeobj__7 __pyx_mstate_global->__pyx_codeobj__7
-#define __pyx_codeobj__9 __pyx_mstate_global->__pyx_codeobj__9
-#define __pyx_codeobj__11 __pyx_mstate_global->__pyx_codeobj__11
-#define __pyx_codeobj__14 __pyx_mstate_global->__pyx_codeobj__14
-#define __pyx_codeobj__16 __pyx_mstate_global->__pyx_codeobj__16
+#define __pyx_codeobj__8 __pyx_mstate_global->__pyx_codeobj__8
+#define __pyx_codeobj__10 __pyx_mstate_global->__pyx_codeobj__10
+#define __pyx_codeobj__12 __pyx_mstate_global->__pyx_codeobj__12
+#define __pyx_codeobj__15 __pyx_mstate_global->__pyx_codeobj__15
 #define __pyx_codeobj__17 __pyx_mstate_global->__pyx_codeobj__17
-#define __pyx_codeobj__19 __pyx_mstate_global->__pyx_codeobj__19
+#define __pyx_codeobj__18 __pyx_mstate_global->__pyx_codeobj__18
 #define __pyx_codeobj__20 __pyx_mstate_global->__pyx_codeobj__20
 #define __pyx_codeobj__21 __pyx_mstate_global->__pyx_codeobj__21
 #define __pyx_codeobj__22 __pyx_mstate_global->__pyx_codeobj__22
-#define __pyx_codeobj__24 __pyx_mstate_global->__pyx_codeobj__24
+#define __pyx_codeobj__23 __pyx_mstate_global->__pyx_codeobj__23
+#define __pyx_codeobj__25 __pyx_mstate_global->__pyx_codeobj__25
+#define __pyx_codeobj__27 __pyx_mstate_global->__pyx_codeobj__27
 /* #### Code section: module_code ### */
 
 /* "../../../../../../../../../../../../opt/homebrew/lib/python3.11/site-packages/numpy/__init__.cython-30.pxd":245
@@ -5929,7 +5990,7 @@ static PyObject *__pyx_pf_6master_10sum_of_first_n_numbers_py(CYTHON_UNUSED PyOb
 /* "npTest.pyx":9
  * @cython.boundscheck(False) # turn off bounds-checking for entire function
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
- * cpdef cnp.ndarray add_numpy_elements(cnp.ndarray[dtype=DTYPE_t, ndim=2] arr):             # <<<<<<<<<<<<<<
+ * cpdef cnp.ndarray add_numpy_elements(cnp.ndarray[dtype=DTYPE_INT_t, ndim=2] arr):             # <<<<<<<<<<<<<<
  *     cdef unsigned long long int total = 0# initialisation important here!
  *     cdef int k
  */
@@ -5972,13 +6033,13 @@ static PyArrayObject *__pyx_f_6master_add_numpy_elements(PyArrayObject *__pyx_v_
   __pyx_pybuffernd_arr.rcbuffer = &__pyx_pybuffer_arr;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr, &__Pyx_TypeInfo_nn___pyx_t_6master_DTYPE_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(1, 9, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr, &__Pyx_TypeInfo_nn___pyx_t_6master_DTYPE_INT_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(1, 9, __pyx_L1_error)
   }
   __pyx_pybuffernd_arr.diminfo[0].strides = __pyx_pybuffernd_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_arr.diminfo[0].shape = __pyx_pybuffernd_arr.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_arr.diminfo[1].strides = __pyx_pybuffernd_arr.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_arr.diminfo[1].shape = __pyx_pybuffernd_arr.rcbuffer->pybuffer.shape[1];
 
   /* "npTest.pyx":10
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
- * cpdef cnp.ndarray add_numpy_elements(cnp.ndarray[dtype=DTYPE_t, ndim=2] arr):
+ * cpdef cnp.ndarray add_numpy_elements(cnp.ndarray[dtype=DTYPE_INT_t, ndim=2] arr):
  *     cdef unsigned long long int total = 0# initialisation important here!             # <<<<<<<<<<<<<<
  *     cdef int k
  *     cdef int i
@@ -6084,7 +6145,7 @@ static PyArrayObject *__pyx_f_6master_add_numpy_elements(PyArrayObject *__pyx_v_
  */
     __pyx_t_9 = 0;
     __pyx_t_10 = __pyx_v_k;
-    __pyx_v_total = (__pyx_v_total + (*__Pyx_BufPtrStrided2d(__pyx_t_6master_DTYPE_t *, __pyx_pybuffernd_arr.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_arr.diminfo[0].strides, __pyx_t_10, __pyx_pybuffernd_arr.diminfo[1].strides)));
+    __pyx_v_total = (__pyx_v_total + (*__Pyx_BufPtrStrided2d(__pyx_t_6master_DTYPE_INT_t *, __pyx_pybuffernd_arr.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_arr.diminfo[0].strides, __pyx_t_10, __pyx_pybuffernd_arr.diminfo[1].strides)));
 
     /* "npTest.pyx":25
  *     for k in range(arr_shape_dim1):
@@ -6095,7 +6156,7 @@ static PyArrayObject *__pyx_f_6master_add_numpy_elements(PyArrayObject *__pyx_v_
  */
     __pyx_t_10 = 0;
     __pyx_t_9 = __pyx_v_k;
-    __pyx_t_2 = __Pyx_PyInt_From_npy_long((*__Pyx_BufPtrStrided2d(__pyx_t_6master_DTYPE_t *, __pyx_pybuffernd_arr.rcbuffer->pybuffer.buf, __pyx_t_10, __pyx_pybuffernd_arr.diminfo[0].strides, __pyx_t_9, __pyx_pybuffernd_arr.diminfo[1].strides))); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 25, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_From_npy_long((*__Pyx_BufPtrStrided2d(__pyx_t_6master_DTYPE_INT_t *, __pyx_pybuffernd_arr.rcbuffer->pybuffer.buf, __pyx_t_10, __pyx_pybuffernd_arr.diminfo[0].strides, __pyx_t_9, __pyx_pybuffernd_arr.diminfo[1].strides))); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 25, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_4 = __Pyx_PyObject_Str(__pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 25, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
@@ -6150,7 +6211,7 @@ static PyArrayObject *__pyx_f_6master_add_numpy_elements(PyArrayObject *__pyx_v_
  */
     __pyx_t_9 = 0;
     __pyx_t_10 = __pyx_v_i;
-    __pyx_t_2 = __Pyx_PyInt_From_npy_long(((*__Pyx_BufPtrStrided2d(__pyx_t_6master_DTYPE_t *, __pyx_pybuffernd_arr.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_arr.diminfo[0].strides, __pyx_t_10, __pyx_pybuffernd_arr.diminfo[1].strides)) + __pyx_v_i)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 30, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_From_npy_long(((*__Pyx_BufPtrStrided2d(__pyx_t_6master_DTYPE_INT_t *, __pyx_pybuffernd_arr.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_arr.diminfo[0].strides, __pyx_t_10, __pyx_pybuffernd_arr.diminfo[1].strides)) + __pyx_v_i)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 30, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 30, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
@@ -6211,7 +6272,7 @@ static PyArrayObject *__pyx_f_6master_add_numpy_elements(PyArrayObject *__pyx_v_
   /* "npTest.pyx":9
  * @cython.boundscheck(False) # turn off bounds-checking for entire function
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
- * cpdef cnp.ndarray add_numpy_elements(cnp.ndarray[dtype=DTYPE_t, ndim=2] arr):             # <<<<<<<<<<<<<<
+ * cpdef cnp.ndarray add_numpy_elements(cnp.ndarray[dtype=DTYPE_INT_t, ndim=2] arr):             # <<<<<<<<<<<<<<
  *     cdef unsigned long long int total = 0# initialisation important here!
  *     cdef int k
  */
@@ -6357,7 +6418,7 @@ static PyObject *__pyx_pf_6master_12add_numpy_elements(CYTHON_UNUSED PyObject *_
   __pyx_pybuffernd_arr.rcbuffer = &__pyx_pybuffer_arr;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr, &__Pyx_TypeInfo_nn___pyx_t_6master_DTYPE_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(1, 9, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr, &__Pyx_TypeInfo_nn___pyx_t_6master_DTYPE_INT_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(1, 9, __pyx_L1_error)
   }
   __pyx_pybuffernd_arr.diminfo[0].strides = __pyx_pybuffernd_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_arr.diminfo[0].shape = __pyx_pybuffernd_arr.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_arr.diminfo[1].strides = __pyx_pybuffernd_arr.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_arr.diminfo[1].shape = __pyx_pybuffernd_arr.rcbuffer->pybuffer.shape[1];
   __Pyx_XDECREF(__pyx_r);
@@ -7342,6 +7403,662 @@ static PyObject *__pyx_pf_6master_10PyMultiply_14__setstate_cython__(CYTHON_UNUS
   return __pyx_r;
 }
 
+/* "matrixManipulation.pyx":12
+ * # This function performs a matrix multiplication for two given matrices: array1 * array2
+ * # TODO accept the raw numpy array and specify dimension and type afterwards
+ * cpdef cnp.ndarray multiply3DmatricesCython(cnp.ndarray[dtype=DTYPE_UINT64_t, ndim=3] arr1, cnp.ndarray[dtype=DTYPE_UINT64_t, ndim=3] arr2):             # <<<<<<<<<<<<<<
+ * # cpdef cnp.ndarray multiply3DmatricesCython(np.ndarray array1, np.ndarray array2):
+ * 
+ */
+
+static PyObject *__pyx_pw_6master_15multiply3DmatricesCython(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+static PyArrayObject *__pyx_f_6master_multiply3DmatricesCython(PyArrayObject *__pyx_v_arr1, PyArrayObject *__pyx_v_arr2, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  int __pyx_v_arr1_shape_dim1;
+  int __pyx_v_arr1_shape_dim2;
+  int __pyx_v_arr1_shape_dim3;
+  int __pyx_v_arr2_shape_dim1;
+  int __pyx_v_arr2_shape_dim2;
+  int __pyx_v_arr2_shape_dim3;
+  PyArrayObject *__pyx_v_returnArray = 0;
+  int __pyx_v_rgbIter;
+  int __pyx_v_rowArr1;
+  int __pyx_v_columnArr2;
+  int __pyx_v_columnArr1;
+  int __pyx_v_currentEntry;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_arr1;
+  __Pyx_Buffer __pyx_pybuffer_arr1;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_arr2;
+  __Pyx_Buffer __pyx_pybuffer_arr2;
+  PyArrayObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  npy_intp *__pyx_t_1;
+  int __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  int __pyx_t_9;
+  int __pyx_t_10;
+  int __pyx_t_11;
+  int __pyx_t_12;
+  int __pyx_t_13;
+  int __pyx_t_14;
+  int __pyx_t_15;
+  int __pyx_t_16;
+  int __pyx_t_17;
+  int __pyx_t_18;
+  int __pyx_t_19;
+  int __pyx_t_20;
+  Py_ssize_t __pyx_t_21;
+  Py_ssize_t __pyx_t_22;
+  Py_ssize_t __pyx_t_23;
+  Py_ssize_t __pyx_t_24;
+  Py_ssize_t __pyx_t_25;
+  Py_ssize_t __pyx_t_26;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("multiply3DmatricesCython", 1);
+  __pyx_pybuffer_arr1.pybuffer.buf = NULL;
+  __pyx_pybuffer_arr1.refcount = 0;
+  __pyx_pybuffernd_arr1.data = NULL;
+  __pyx_pybuffernd_arr1.rcbuffer = &__pyx_pybuffer_arr1;
+  __pyx_pybuffer_arr2.pybuffer.buf = NULL;
+  __pyx_pybuffer_arr2.refcount = 0;
+  __pyx_pybuffernd_arr2.data = NULL;
+  __pyx_pybuffernd_arr2.rcbuffer = &__pyx_pybuffer_arr2;
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr1.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr1, &__Pyx_TypeInfo_nn___pyx_t_6master_DTYPE_UINT64_t, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) __PYX_ERR(5, 12, __pyx_L1_error)
+  }
+  __pyx_pybuffernd_arr1.diminfo[0].strides = __pyx_pybuffernd_arr1.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_arr1.diminfo[0].shape = __pyx_pybuffernd_arr1.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_arr1.diminfo[1].strides = __pyx_pybuffernd_arr1.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_arr1.diminfo[1].shape = __pyx_pybuffernd_arr1.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_arr1.diminfo[2].strides = __pyx_pybuffernd_arr1.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_arr1.diminfo[2].shape = __pyx_pybuffernd_arr1.rcbuffer->pybuffer.shape[2];
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr2.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr2, &__Pyx_TypeInfo_nn___pyx_t_6master_DTYPE_UINT64_t, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) __PYX_ERR(5, 12, __pyx_L1_error)
+  }
+  __pyx_pybuffernd_arr2.diminfo[0].strides = __pyx_pybuffernd_arr2.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_arr2.diminfo[0].shape = __pyx_pybuffernd_arr2.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_arr2.diminfo[1].strides = __pyx_pybuffernd_arr2.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_arr2.diminfo[1].shape = __pyx_pybuffernd_arr2.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_arr2.diminfo[2].strides = __pyx_pybuffernd_arr2.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_arr2.diminfo[2].shape = __pyx_pybuffernd_arr2.rcbuffer->pybuffer.shape[2];
+
+  /* "matrixManipulation.pyx":22
+ *     # print(arr1.dtype)
+ * 
+ *     cdef int arr1_shape_dim1 = arr1.shape[0]             # <<<<<<<<<<<<<<
+ *     cdef int arr1_shape_dim2 = arr1.shape[1]
+ *     cdef int arr1_shape_dim3 = arr1.shape[2]
+ */
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_arr1)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(5, 22, __pyx_L1_error)
+  __pyx_v_arr1_shape_dim1 = (__pyx_t_1[0]);
+
+  /* "matrixManipulation.pyx":23
+ * 
+ *     cdef int arr1_shape_dim1 = arr1.shape[0]
+ *     cdef int arr1_shape_dim2 = arr1.shape[1]             # <<<<<<<<<<<<<<
+ *     cdef int arr1_shape_dim3 = arr1.shape[2]
+ *     cdef int arr2_shape_dim1 = arr2.shape[0]
+ */
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_arr1)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(5, 23, __pyx_L1_error)
+  __pyx_v_arr1_shape_dim2 = (__pyx_t_1[1]);
+
+  /* "matrixManipulation.pyx":24
+ *     cdef int arr1_shape_dim1 = arr1.shape[0]
+ *     cdef int arr1_shape_dim2 = arr1.shape[1]
+ *     cdef int arr1_shape_dim3 = arr1.shape[2]             # <<<<<<<<<<<<<<
+ *     cdef int arr2_shape_dim1 = arr2.shape[0]
+ *     cdef int arr2_shape_dim2 = arr2.shape[1]
+ */
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_arr1)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(5, 24, __pyx_L1_error)
+  __pyx_v_arr1_shape_dim3 = (__pyx_t_1[2]);
+
+  /* "matrixManipulation.pyx":25
+ *     cdef int arr1_shape_dim2 = arr1.shape[1]
+ *     cdef int arr1_shape_dim3 = arr1.shape[2]
+ *     cdef int arr2_shape_dim1 = arr2.shape[0]             # <<<<<<<<<<<<<<
+ *     cdef int arr2_shape_dim2 = arr2.shape[1]
+ *     cdef int arr2_shape_dim3 = arr2.shape[2]
+ */
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_arr2)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(5, 25, __pyx_L1_error)
+  __pyx_v_arr2_shape_dim1 = (__pyx_t_1[0]);
+
+  /* "matrixManipulation.pyx":26
+ *     cdef int arr1_shape_dim3 = arr1.shape[2]
+ *     cdef int arr2_shape_dim1 = arr2.shape[0]
+ *     cdef int arr2_shape_dim2 = arr2.shape[1]             # <<<<<<<<<<<<<<
+ *     cdef int arr2_shape_dim3 = arr2.shape[2]
+ * 
+ */
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_arr2)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(5, 26, __pyx_L1_error)
+  __pyx_v_arr2_shape_dim2 = (__pyx_t_1[1]);
+
+  /* "matrixManipulation.pyx":27
+ *     cdef int arr2_shape_dim1 = arr2.shape[0]
+ *     cdef int arr2_shape_dim2 = arr2.shape[1]
+ *     cdef int arr2_shape_dim3 = arr2.shape[2]             # <<<<<<<<<<<<<<
+ * 
+ *     # check for dimension errors
+ */
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_arr2)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(5, 27, __pyx_L1_error)
+  __pyx_v_arr2_shape_dim3 = (__pyx_t_1[2]);
+
+  /* "matrixManipulation.pyx":30
+ * 
+ *     # check for dimension errors
+ *     if arr1_shape_dim3 != arr2_shape_dim3:             # <<<<<<<<<<<<<<
+ *         print("Dimension error: Third dimension from array1 is " + str(arr1_shape_dim3) + ", and from array2 is " + str(arr2_shape_dim3))
+ *         # TODO handle exception here
+ */
+  __pyx_t_2 = (__pyx_v_arr1_shape_dim3 != __pyx_v_arr2_shape_dim3);
+  if (__pyx_t_2) {
+
+    /* "matrixManipulation.pyx":31
+ *     # check for dimension errors
+ *     if arr1_shape_dim3 != arr2_shape_dim3:
+ *         print("Dimension error: Third dimension from array1 is " + str(arr1_shape_dim3) + ", and from array2 is " + str(arr2_shape_dim3))             # <<<<<<<<<<<<<<
+ *         # TODO handle exception here
+ *     elif arr1_shape_dim2 != arr2_shape_dim1:
+ */
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_arr1_shape_dim3); if (unlikely(!__pyx_t_3)) __PYX_ERR(5, 31, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_4 = __Pyx_PyObject_Str(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(5, 31, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = PyNumber_Add(__pyx_kp_s_Dimension_error_Third_dimension, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(5, 31, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = PyNumber_Add(__pyx_t_3, __pyx_kp_s_and_from_array2_is); if (unlikely(!__pyx_t_4)) __PYX_ERR(5, 31, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_arr2_shape_dim3); if (unlikely(!__pyx_t_3)) __PYX_ERR(5, 31, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_5 = __Pyx_PyObject_Str(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(5, 31, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = PyNumber_Add(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(5, 31, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(5, 31, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+    /* "matrixManipulation.pyx":30
+ * 
+ *     # check for dimension errors
+ *     if arr1_shape_dim3 != arr2_shape_dim3:             # <<<<<<<<<<<<<<
+ *         print("Dimension error: Third dimension from array1 is " + str(arr1_shape_dim3) + ", and from array2 is " + str(arr2_shape_dim3))
+ *         # TODO handle exception here
+ */
+    goto __pyx_L3;
+  }
+
+  /* "matrixManipulation.pyx":33
+ *         print("Dimension error: Third dimension from array1 is " + str(arr1_shape_dim3) + ", and from array2 is " + str(arr2_shape_dim3))
+ *         # TODO handle exception here
+ *     elif arr1_shape_dim2 != arr2_shape_dim1:             # <<<<<<<<<<<<<<
+ *         print("Dimension error: dimensions do not match!")
+ *         # TODO handle exception here
+ */
+  __pyx_t_2 = (__pyx_v_arr1_shape_dim2 != __pyx_v_arr2_shape_dim1);
+  if (__pyx_t_2) {
+
+    /* "matrixManipulation.pyx":34
+ *         # TODO handle exception here
+ *     elif arr1_shape_dim2 != arr2_shape_dim1:
+ *         print("Dimension error: dimensions do not match!")             # <<<<<<<<<<<<<<
+ *         # TODO handle exception here
+ * 
+ */
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(5, 34, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+    /* "matrixManipulation.pyx":33
+ *         print("Dimension error: Third dimension from array1 is " + str(arr1_shape_dim3) + ", and from array2 is " + str(arr2_shape_dim3))
+ *         # TODO handle exception here
+ *     elif arr1_shape_dim2 != arr2_shape_dim1:             # <<<<<<<<<<<<<<
+ *         print("Dimension error: dimensions do not match!")
+ *         # TODO handle exception here
+ */
+  }
+  __pyx_L3:;
+
+  /* "matrixManipulation.pyx":38
+ * 
+ *     # Iterate through third dimension and perform matrix multiplication
+ *     cdef cnp.ndarray returnArray = np.empty([arr1_shape_dim1, arr2_shape_dim2, arr1_shape_dim3])             # <<<<<<<<<<<<<<
+ *     cdef int rgbIter = 0
+ *     cdef int rowArr1 = 0
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(5, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(5, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_arr1_shape_dim1); if (unlikely(!__pyx_t_3)) __PYX_ERR(5, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_arr2_shape_dim2); if (unlikely(!__pyx_t_6)) __PYX_ERR(5, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_arr1_shape_dim3); if (unlikely(!__pyx_t_7)) __PYX_ERR(5, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_8 = PyList_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(5, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_8);
+  __Pyx_GIVEREF(__pyx_t_3);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_8, 0, __pyx_t_3)) __PYX_ERR(5, 38, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_6);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_8, 1, __pyx_t_6)) __PYX_ERR(5, 38, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_7);
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_8, 2, __pyx_t_7)) __PYX_ERR(5, 38, __pyx_L1_error);
+  __pyx_t_3 = 0;
+  __pyx_t_6 = 0;
+  __pyx_t_7 = 0;
+  __pyx_t_7 = NULL;
+  __pyx_t_9 = 0;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_7)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_7);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __pyx_t_9 = 1;
+    }
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_7, __pyx_t_8};
+    __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_9, 1+__pyx_t_9);
+    __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(5, 38, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(5, 38, __pyx_L1_error)
+  __pyx_v_returnArray = ((PyArrayObject *)__pyx_t_5);
+  __pyx_t_5 = 0;
+
+  /* "matrixManipulation.pyx":39
+ *     # Iterate through third dimension and perform matrix multiplication
+ *     cdef cnp.ndarray returnArray = np.empty([arr1_shape_dim1, arr2_shape_dim2, arr1_shape_dim3])
+ *     cdef int rgbIter = 0             # <<<<<<<<<<<<<<
+ *     cdef int rowArr1 = 0
+ *     cdef int columnArr2 = 0
+ */
+  __pyx_v_rgbIter = 0;
+
+  /* "matrixManipulation.pyx":40
+ *     cdef cnp.ndarray returnArray = np.empty([arr1_shape_dim1, arr2_shape_dim2, arr1_shape_dim3])
+ *     cdef int rgbIter = 0
+ *     cdef int rowArr1 = 0             # <<<<<<<<<<<<<<
+ *     cdef int columnArr2 = 0
+ *     cdef int columnArr1 = 0
+ */
+  __pyx_v_rowArr1 = 0;
+
+  /* "matrixManipulation.pyx":41
+ *     cdef int rgbIter = 0
+ *     cdef int rowArr1 = 0
+ *     cdef int columnArr2 = 0             # <<<<<<<<<<<<<<
+ *     cdef int columnArr1 = 0
+ *     cdef int currentEntry = 0
+ */
+  __pyx_v_columnArr2 = 0;
+
+  /* "matrixManipulation.pyx":42
+ *     cdef int rowArr1 = 0
+ *     cdef int columnArr2 = 0
+ *     cdef int columnArr1 = 0             # <<<<<<<<<<<<<<
+ *     cdef int currentEntry = 0
+ *     for rgbIter in range(arr1_shape_dim3):
+ */
+  __pyx_v_columnArr1 = 0;
+
+  /* "matrixManipulation.pyx":43
+ *     cdef int columnArr2 = 0
+ *     cdef int columnArr1 = 0
+ *     cdef int currentEntry = 0             # <<<<<<<<<<<<<<
+ *     for rgbIter in range(arr1_shape_dim3):
+ *         for rowArr1 in range(arr1_shape_dim2):
+ */
+  __pyx_v_currentEntry = 0;
+
+  /* "matrixManipulation.pyx":44
+ *     cdef int columnArr1 = 0
+ *     cdef int currentEntry = 0
+ *     for rgbIter in range(arr1_shape_dim3):             # <<<<<<<<<<<<<<
+ *         for rowArr1 in range(arr1_shape_dim2):
+ *             for columnArr2 in range(arr2_shape_dim2):
+ */
+  __pyx_t_9 = __pyx_v_arr1_shape_dim3;
+  __pyx_t_10 = __pyx_t_9;
+  for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
+    __pyx_v_rgbIter = __pyx_t_11;
+
+    /* "matrixManipulation.pyx":45
+ *     cdef int currentEntry = 0
+ *     for rgbIter in range(arr1_shape_dim3):
+ *         for rowArr1 in range(arr1_shape_dim2):             # <<<<<<<<<<<<<<
+ *             for columnArr2 in range(arr2_shape_dim2):
+ *                 currentEntry = 0
+ */
+    __pyx_t_12 = __pyx_v_arr1_shape_dim2;
+    __pyx_t_13 = __pyx_t_12;
+    for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
+      __pyx_v_rowArr1 = __pyx_t_14;
+
+      /* "matrixManipulation.pyx":46
+ *     for rgbIter in range(arr1_shape_dim3):
+ *         for rowArr1 in range(arr1_shape_dim2):
+ *             for columnArr2 in range(arr2_shape_dim2):             # <<<<<<<<<<<<<<
+ *                 currentEntry = 0
+ *                 for columnArr1 in range(arr1_shape_dim2):
+ */
+      __pyx_t_15 = __pyx_v_arr2_shape_dim2;
+      __pyx_t_16 = __pyx_t_15;
+      for (__pyx_t_17 = 0; __pyx_t_17 < __pyx_t_16; __pyx_t_17+=1) {
+        __pyx_v_columnArr2 = __pyx_t_17;
+
+        /* "matrixManipulation.pyx":47
+ *         for rowArr1 in range(arr1_shape_dim2):
+ *             for columnArr2 in range(arr2_shape_dim2):
+ *                 currentEntry = 0             # <<<<<<<<<<<<<<
+ *                 for columnArr1 in range(arr1_shape_dim2):
+ *                     currentEntry += arr1[rowArr1, columnArr1, rgbIter] * arr2[columnArr1, columnArr2, rgbIter]
+ */
+        __pyx_v_currentEntry = 0;
+
+        /* "matrixManipulation.pyx":48
+ *             for columnArr2 in range(arr2_shape_dim2):
+ *                 currentEntry = 0
+ *                 for columnArr1 in range(arr1_shape_dim2):             # <<<<<<<<<<<<<<
+ *                     currentEntry += arr1[rowArr1, columnArr1, rgbIter] * arr2[columnArr1, columnArr2, rgbIter]
+ *                 returnArray[rowArr1, columnArr2, rgbIter] = currentEntry
+ */
+        __pyx_t_18 = __pyx_v_arr1_shape_dim2;
+        __pyx_t_19 = __pyx_t_18;
+        for (__pyx_t_20 = 0; __pyx_t_20 < __pyx_t_19; __pyx_t_20+=1) {
+          __pyx_v_columnArr1 = __pyx_t_20;
+
+          /* "matrixManipulation.pyx":49
+ *                 currentEntry = 0
+ *                 for columnArr1 in range(arr1_shape_dim2):
+ *                     currentEntry += arr1[rowArr1, columnArr1, rgbIter] * arr2[columnArr1, columnArr2, rgbIter]             # <<<<<<<<<<<<<<
+ *                 returnArray[rowArr1, columnArr2, rgbIter] = currentEntry
+ * 
+ */
+          __pyx_t_21 = __pyx_v_rowArr1;
+          __pyx_t_22 = __pyx_v_columnArr1;
+          __pyx_t_23 = __pyx_v_rgbIter;
+          __pyx_t_24 = __pyx_v_columnArr1;
+          __pyx_t_25 = __pyx_v_columnArr2;
+          __pyx_t_26 = __pyx_v_rgbIter;
+          __pyx_v_currentEntry = (__pyx_v_currentEntry + ((*__Pyx_BufPtrStrided3d(__pyx_t_6master_DTYPE_UINT64_t *, __pyx_pybuffernd_arr1.rcbuffer->pybuffer.buf, __pyx_t_21, __pyx_pybuffernd_arr1.diminfo[0].strides, __pyx_t_22, __pyx_pybuffernd_arr1.diminfo[1].strides, __pyx_t_23, __pyx_pybuffernd_arr1.diminfo[2].strides)) * (*__Pyx_BufPtrStrided3d(__pyx_t_6master_DTYPE_UINT64_t *, __pyx_pybuffernd_arr2.rcbuffer->pybuffer.buf, __pyx_t_24, __pyx_pybuffernd_arr2.diminfo[0].strides, __pyx_t_25, __pyx_pybuffernd_arr2.diminfo[1].strides, __pyx_t_26, __pyx_pybuffernd_arr2.diminfo[2].strides))));
+        }
+
+        /* "matrixManipulation.pyx":50
+ *                 for columnArr1 in range(arr1_shape_dim2):
+ *                     currentEntry += arr1[rowArr1, columnArr1, rgbIter] * arr2[columnArr1, columnArr2, rgbIter]
+ *                 returnArray[rowArr1, columnArr2, rgbIter] = currentEntry             # <<<<<<<<<<<<<<
+ * 
+ *     return returnArray
+ */
+        __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_currentEntry); if (unlikely(!__pyx_t_5)) __PYX_ERR(5, 50, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_rowArr1); if (unlikely(!__pyx_t_4)) __PYX_ERR(5, 50, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_columnArr2); if (unlikely(!__pyx_t_8)) __PYX_ERR(5, 50, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_8);
+        __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_rgbIter); if (unlikely(!__pyx_t_7)) __PYX_ERR(5, 50, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_7);
+        __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(5, 50, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_6);
+        __Pyx_GIVEREF(__pyx_t_4);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4)) __PYX_ERR(5, 50, __pyx_L1_error);
+        __Pyx_GIVEREF(__pyx_t_8);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_8)) __PYX_ERR(5, 50, __pyx_L1_error);
+        __Pyx_GIVEREF(__pyx_t_7);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_t_7)) __PYX_ERR(5, 50, __pyx_L1_error);
+        __pyx_t_4 = 0;
+        __pyx_t_8 = 0;
+        __pyx_t_7 = 0;
+        if (unlikely((PyObject_SetItem(((PyObject *)__pyx_v_returnArray), __pyx_t_6, __pyx_t_5) < 0))) __PYX_ERR(5, 50, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      }
+    }
+  }
+
+  /* "matrixManipulation.pyx":52
+ *                 returnArray[rowArr1, columnArr2, rgbIter] = currentEntry
+ * 
+ *     return returnArray             # <<<<<<<<<<<<<<
+ * 
+ */
+  __Pyx_XDECREF((PyObject *)__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_returnArray);
+  __pyx_r = __pyx_v_returnArray;
+  goto __pyx_L0;
+
+  /* "matrixManipulation.pyx":12
+ * # This function performs a matrix multiplication for two given matrices: array1 * array2
+ * # TODO accept the raw numpy array and specify dimension and type afterwards
+ * cpdef cnp.ndarray multiply3DmatricesCython(cnp.ndarray[dtype=DTYPE_UINT64_t, ndim=3] arr1, cnp.ndarray[dtype=DTYPE_UINT64_t, ndim=3] arr2):             # <<<<<<<<<<<<<<
+ * # cpdef cnp.ndarray multiply3DmatricesCython(np.ndarray array1, np.ndarray array2):
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_arr1.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_arr2.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("master.multiply3DmatricesCython", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_arr1.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_arr2.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_returnArray);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_6master_15multiply3DmatricesCython(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+static PyMethodDef __pyx_mdef_6master_15multiply3DmatricesCython = {"multiply3DmatricesCython", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6master_15multiply3DmatricesCython, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6master_15multiply3DmatricesCython(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyArrayObject *__pyx_v_arr1 = 0;
+  PyArrayObject *__pyx_v_arr2 = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[2] = {0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("multiply3DmatricesCython (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_MACROS
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_arr1,&__pyx_n_s_arr2,0};
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  2: values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_arr1)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(5, 12, __pyx_L3_error)
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_arr2)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(5, 12, __pyx_L3_error)
+        else {
+          __Pyx_RaiseArgtupleInvalid("multiply3DmatricesCython", 1, 2, 2, 1); __PYX_ERR(5, 12, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "multiply3DmatricesCython") < 0)) __PYX_ERR(5, 12, __pyx_L3_error)
+      }
+    } else if (unlikely(__pyx_nargs != 2)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+      values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+    }
+    __pyx_v_arr1 = ((PyArrayObject *)values[0]);
+    __pyx_v_arr2 = ((PyArrayObject *)values[1]);
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("multiply3DmatricesCython", 1, 2, 2, __pyx_nargs); __PYX_ERR(5, 12, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_AddTraceback("master.multiply3DmatricesCython", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_arr1), __pyx_ptype_5numpy_ndarray, 1, "arr1", 0))) __PYX_ERR(5, 12, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_arr2), __pyx_ptype_5numpy_ndarray, 1, "arr2", 0))) __PYX_ERR(5, 12, __pyx_L1_error)
+  __pyx_r = __pyx_pf_6master_14multiply3DmatricesCython(__pyx_self, __pyx_v_arr1, __pyx_v_arr2);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_6master_14multiply3DmatricesCython(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_arr1, PyArrayObject *__pyx_v_arr2) {
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_arr1;
+  __Pyx_Buffer __pyx_pybuffer_arr1;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_arr2;
+  __Pyx_Buffer __pyx_pybuffer_arr2;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("multiply3DmatricesCython", 1);
+  __pyx_pybuffer_arr1.pybuffer.buf = NULL;
+  __pyx_pybuffer_arr1.refcount = 0;
+  __pyx_pybuffernd_arr1.data = NULL;
+  __pyx_pybuffernd_arr1.rcbuffer = &__pyx_pybuffer_arr1;
+  __pyx_pybuffer_arr2.pybuffer.buf = NULL;
+  __pyx_pybuffer_arr2.refcount = 0;
+  __pyx_pybuffernd_arr2.data = NULL;
+  __pyx_pybuffernd_arr2.rcbuffer = &__pyx_pybuffer_arr2;
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr1.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr1, &__Pyx_TypeInfo_nn___pyx_t_6master_DTYPE_UINT64_t, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) __PYX_ERR(5, 12, __pyx_L1_error)
+  }
+  __pyx_pybuffernd_arr1.diminfo[0].strides = __pyx_pybuffernd_arr1.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_arr1.diminfo[0].shape = __pyx_pybuffernd_arr1.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_arr1.diminfo[1].strides = __pyx_pybuffernd_arr1.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_arr1.diminfo[1].shape = __pyx_pybuffernd_arr1.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_arr1.diminfo[2].strides = __pyx_pybuffernd_arr1.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_arr1.diminfo[2].shape = __pyx_pybuffernd_arr1.rcbuffer->pybuffer.shape[2];
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr2.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr2, &__Pyx_TypeInfo_nn___pyx_t_6master_DTYPE_UINT64_t, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) __PYX_ERR(5, 12, __pyx_L1_error)
+  }
+  __pyx_pybuffernd_arr2.diminfo[0].strides = __pyx_pybuffernd_arr2.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_arr2.diminfo[0].shape = __pyx_pybuffernd_arr2.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_arr2.diminfo[1].strides = __pyx_pybuffernd_arr2.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_arr2.diminfo[1].shape = __pyx_pybuffernd_arr2.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_arr2.diminfo[2].strides = __pyx_pybuffernd_arr2.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_arr2.diminfo[2].shape = __pyx_pybuffernd_arr2.rcbuffer->pybuffer.shape[2];
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = ((PyObject *)__pyx_f_6master_multiply3DmatricesCython(__pyx_v_arr1, __pyx_v_arr2, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(5, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_arr1.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_arr2.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("master.multiply3DmatricesCython", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_arr1.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_arr2.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 static PyObject *__pyx_tp_new_6master_PyMultiply(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   struct __pyx_obj_6master_PyMultiply *p;
   PyObject *o;
@@ -7506,6 +8223,8 @@ static PyMethodDef __pyx_methods[] = {
 
 static int __Pyx_CreateStringTabAndInitStrings(void) {
   __Pyx_StringTabEntry __pyx_string_tab[] = {
+    {&__pyx_kp_s_Dimension_error_Third_dimension, __pyx_k_Dimension_error_Third_dimension, sizeof(__pyx_k_Dimension_error_Third_dimension), 0, 0, 1, 0},
+    {&__pyx_kp_s_Dimension_error_dimensions_do_no, __pyx_k_Dimension_error_dimensions_do_no, sizeof(__pyx_k_Dimension_error_dimensions_do_no), 0, 0, 1, 0},
     {&__pyx_n_s_ImportError, __pyx_k_ImportError, sizeof(__pyx_k_ImportError), 0, 0, 1, 1},
     {&__pyx_kp_s_Multiply_wrapper_pyx, __pyx_k_Multiply_wrapper_pyx, sizeof(__pyx_k_Multiply_wrapper_pyx), 0, 0, 1, 0},
     {&__pyx_n_s_PyMultiply, __pyx_k_PyMultiply, sizeof(__pyx_k_PyMultiply), 0, 0, 1, 1},
@@ -7516,11 +8235,14 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_PyMultiply_multiply, __pyx_k_PyMultiply_multiply, sizeof(__pyx_k_PyMultiply_multiply), 0, 0, 1, 1},
     {&__pyx_n_s_PyMultiply_setFactors, __pyx_k_PyMultiply_setFactors, sizeof(__pyx_k_PyMultiply_setFactors), 0, 0, 1, 1},
     {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
-    {&__pyx_n_s__12, __pyx_k__12, sizeof(__pyx_k__12), 0, 0, 1, 1},
-    {&__pyx_n_s__25, __pyx_k__25, sizeof(__pyx_k__25), 0, 0, 1, 1},
+    {&__pyx_n_s__13, __pyx_k__13, sizeof(__pyx_k__13), 0, 0, 1, 1},
+    {&__pyx_n_s__28, __pyx_k__28, sizeof(__pyx_k__28), 0, 0, 1, 1},
     {&__pyx_n_s_add, __pyx_k_add, sizeof(__pyx_k_add), 0, 0, 1, 1},
     {&__pyx_n_s_add_numpy_elements, __pyx_k_add_numpy_elements, sizeof(__pyx_k_add_numpy_elements), 0, 0, 1, 1},
+    {&__pyx_kp_s_and_from_array2_is, __pyx_k_and_from_array2_is, sizeof(__pyx_k_and_from_array2_is), 0, 0, 1, 0},
     {&__pyx_n_s_arr, __pyx_k_arr, sizeof(__pyx_k_arr), 0, 0, 1, 1},
+    {&__pyx_n_s_arr1, __pyx_k_arr1, sizeof(__pyx_k_arr1), 0, 0, 1, 1},
+    {&__pyx_n_s_arr2, __pyx_k_arr2, sizeof(__pyx_k_arr2), 0, 0, 1, 1},
     {&__pyx_kp_s_arr_arr_shape_dim0_k, __pyx_k_arr_arr_shape_dim0_k, sizeof(__pyx_k_arr_arr_shape_dim0_k), 0, 0, 1, 0},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
     {&__pyx_kp_s_basicArithmetic_pyx, __pyx_k_basicArithmetic_pyx, sizeof(__pyx_k_basicArithmetic_pyx), 0, 0, 1, 0},
@@ -7543,8 +8265,10 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_isenabled, __pyx_k_isenabled, sizeof(__pyx_k_isenabled), 0, 1, 0, 0},
     {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
     {&__pyx_n_s_master, __pyx_k_master, sizeof(__pyx_k_master), 0, 0, 1, 1},
+    {&__pyx_kp_s_matrixManipulation_pyx, __pyx_k_matrixManipulation_pyx, sizeof(__pyx_k_matrixManipulation_pyx), 0, 0, 1, 0},
     {&__pyx_n_s_mul, __pyx_k_mul, sizeof(__pyx_k_mul), 0, 0, 1, 1},
     {&__pyx_n_s_multiply, __pyx_k_multiply, sizeof(__pyx_k_multiply), 0, 0, 1, 1},
+    {&__pyx_n_s_multiply3DmatricesCython, __pyx_k_multiply3DmatricesCython, sizeof(__pyx_k_multiply3DmatricesCython), 0, 0, 1, 1},
     {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
     {&__pyx_n_s_np, __pyx_k_np, sizeof(__pyx_k_np), 0, 0, 1, 1},
     {&__pyx_kp_s_npTest_pyx, __pyx_k_npTest_pyx, sizeof(__pyx_k_npTest_pyx), 0, 0, 1, 0},
@@ -7616,6 +8340,17 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
+  /* "matrixManipulation.pyx":34
+ *         # TODO handle exception here
+ *     elif arr1_shape_dim2 != arr2_shape_dim1:
+ *         print("Dimension error: dimensions do not match!")             # <<<<<<<<<<<<<<
+ *         # TODO handle exception here
+ * 
+ */
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_Dimension_error_dimensions_do_no); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(5, 34, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__3);
+  __Pyx_GIVEREF(__pyx_tuple__3);
+
   /* "basicArithmetic.pyx":6
  * 
  * # basic arithmetic functions using cython syntax
@@ -7623,10 +8358,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     return x+y
  * 
  */
-  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_n_s_x, __pyx_n_s_y); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 6, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__3);
-  __Pyx_GIVEREF(__pyx_tuple__3);
-  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_basicArithmetic_pyx, __pyx_n_s_add, 6, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_n_s_x, __pyx_n_s_y); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_basicArithmetic_pyx, __pyx_n_s_add, 6, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 6, __pyx_L1_error)
 
   /* "basicArithmetic.pyx":9
  *     return x+y
@@ -7635,7 +8370,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     return x-y
  * 
  */
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_basicArithmetic_pyx, __pyx_n_s_sub, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_basicArithmetic_pyx, __pyx_n_s_sub, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 9, __pyx_L1_error)
 
   /* "basicArithmetic.pyx":12
  *     return x-y
@@ -7644,7 +8379,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     return x*y
  * 
  */
-  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_basicArithmetic_pyx, __pyx_n_s_mul, 12, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_basicArithmetic_pyx, __pyx_n_s_mul, 12, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 12, __pyx_L1_error)
 
   /* "basicArithmetic.pyx":15
  *     return x*y
@@ -7653,7 +8388,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     return x/y
  * 
  */
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_basicArithmetic_pyx, __pyx_n_s_div, 15, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_basicArithmetic_pyx, __pyx_n_s_div, 15, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 15, __pyx_L1_error)
 
   /* "basicArithmetic.pyx":21
  * ## speed comparison of pure python and cython:
@@ -7662,10 +8397,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     cdef unsigned long long i = 0
  *     cdef unsigned long long result = 0
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_n_s_number); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__8);
-  __Pyx_GIVEREF(__pyx_tuple__8);
-  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_basicArithmetic_pyx, __pyx_n_s_sum_of_first_n_numbers_cy, 21, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_n_s_number); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_basicArithmetic_pyx, __pyx_n_s_sum_of_first_n_numbers_cy, 21, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 21, __pyx_L1_error)
 
   /* "basicArithmetic.pyx":29
  * 
@@ -7674,22 +8409,22 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     result = 0
  *     for i in range(number):
  */
-  __pyx_tuple__10 = PyTuple_Pack(3, __pyx_n_s_number, __pyx_n_s_result, __pyx_n_s_i); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 29, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__10);
-  __Pyx_GIVEREF(__pyx_tuple__10);
-  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_basicArithmetic_pyx, __pyx_n_s_sum_of_first_n_numbers_py, 29, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(3, __pyx_n_s_number, __pyx_n_s_result, __pyx_n_s_i); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_basicArithmetic_pyx, __pyx_n_s_sum_of_first_n_numbers_py, 29, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 29, __pyx_L1_error)
 
   /* "npTest.pyx":9
  * @cython.boundscheck(False) # turn off bounds-checking for entire function
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
- * cpdef cnp.ndarray add_numpy_elements(cnp.ndarray[dtype=DTYPE_t, ndim=2] arr):             # <<<<<<<<<<<<<<
+ * cpdef cnp.ndarray add_numpy_elements(cnp.ndarray[dtype=DTYPE_INT_t, ndim=2] arr):             # <<<<<<<<<<<<<<
  *     cdef unsigned long long int total = 0# initialisation important here!
  *     cdef int k
  */
-  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_n_s_arr); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(1, 9, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__13);
-  __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_npTest_pyx, __pyx_n_s_add_numpy_elements, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(1, 9, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_n_s_arr); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(1, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__14);
+  __Pyx_GIVEREF(__pyx_tuple__14);
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_npTest_pyx, __pyx_n_s_add_numpy_elements, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(1, 9, __pyx_L1_error)
 
   /* "Multiply_wrapper.pyx":16
  *         self.multiply_inst = Multiply(factor1, factor2)
@@ -7698,10 +8433,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         return self.multiply_inst.getFactor1()
  * 
  */
-  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(4, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__15);
-  __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_getFactor1, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(4, 16, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(4, 16, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__16);
+  __Pyx_GIVEREF(__pyx_tuple__16);
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_getFactor1, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(4, 16, __pyx_L1_error)
 
   /* "Multiply_wrapper.pyx":19
  *         return self.multiply_inst.getFactor1()
@@ -7710,7 +8445,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         return self.multiply_inst.getFactor2()
  * 
  */
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_getFactor2, 19, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(4, 19, __pyx_L1_error)
+  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_getFactor2, 19, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(4, 19, __pyx_L1_error)
 
   /* "Multiply_wrapper.pyx":27
  *     #     return numpy_array
@@ -7719,10 +8454,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         return self.multiply_inst.setFactors(factor1, factor2)
  * 
  */
-  __pyx_tuple__18 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_factor1, __pyx_n_s_factor2); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(4, 27, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__18);
-  __Pyx_GIVEREF(__pyx_tuple__18);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_setFactors, 27, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(4, 27, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_factor1, __pyx_n_s_factor2); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(4, 27, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__19);
+  __Pyx_GIVEREF(__pyx_tuple__19);
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_setFactors, 27, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(4, 27, __pyx_L1_error)
 
   /* "Multiply_wrapper.pyx":30
  *         return self.multiply_inst.setFactors(factor1, factor2)
@@ -7731,7 +8466,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         return self.multiply_inst.multiply(factor1, factor2)
  * 
  */
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_multiply, 30, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(4, 30, __pyx_L1_error)
+  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_multiply, 30, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(4, 30, __pyx_L1_error)
 
   /* "Multiply_wrapper.pyx":33
  *         return self.multiply_inst.multiply(factor1, factor2)
@@ -7739,14 +8474,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     def multiply(self):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.multiply()
  */
-  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_multiply, 33, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(4, 33, __pyx_L1_error)
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Multiply_wrapper_pyx, __pyx_n_s_multiply, 33, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(4, 33, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
  *     raise TypeError, "self.multiply_inst cannot be converted to a Python object for pickling"
  * def __setstate_cython__(self, __pyx_state):
  */
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_reduce_cython, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(2, 1, __pyx_L1_error)
+  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_reduce_cython, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(2, 1, __pyx_L1_error)
 
   /* "(tree fragment)":3
  * def __reduce_cython__(self):
@@ -7754,10 +8489,22 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     raise TypeError, "self.multiply_inst cannot be converted to a Python object for pickling"
  */
-  __pyx_tuple__23 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_pyx_state); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(2, 3, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__23);
-  __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_setstate_cython, 3, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(2, 3, __pyx_L1_error)
+  __pyx_tuple__24 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_pyx_state); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(2, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__24);
+  __Pyx_GIVEREF(__pyx_tuple__24);
+  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_setstate_cython, 3, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(2, 3, __pyx_L1_error)
+
+  /* "matrixManipulation.pyx":12
+ * # This function performs a matrix multiplication for two given matrices: array1 * array2
+ * # TODO accept the raw numpy array and specify dimension and type afterwards
+ * cpdef cnp.ndarray multiply3DmatricesCython(cnp.ndarray[dtype=DTYPE_UINT64_t, ndim=3] arr1, cnp.ndarray[dtype=DTYPE_UINT64_t, ndim=3] arr2):             # <<<<<<<<<<<<<<
+ * # cpdef cnp.ndarray multiply3DmatricesCython(np.ndarray array1, np.ndarray array2):
+ * 
+ */
+  __pyx_tuple__26 = PyTuple_Pack(2, __pyx_n_s_arr1, __pyx_n_s_arr2); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(5, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__26);
+  __Pyx_GIVEREF(__pyx_tuple__26);
+  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_matrixManipulation_pyx, __pyx_n_s_multiply3DmatricesCython, 12, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(5, 12, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -7767,10 +8514,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 /* #### Code section: init_constants ### */
 
 static CYTHON_SMALL_CODE int __Pyx_InitConstants(void) {
-  if (__Pyx_CreateStringTabAndInitStrings() < 0) __PYX_ERR(5, 1, __pyx_L1_error);
-  __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(5, 1, __pyx_L1_error)
-  __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(5, 1, __pyx_L1_error)
-  __pyx_int_3 = PyInt_FromLong(3); if (unlikely(!__pyx_int_3)) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__Pyx_CreateStringTabAndInitStrings() < 0) __PYX_ERR(6, 1, __pyx_L1_error);
+  __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(6, 1, __pyx_L1_error)
+  __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(6, 1, __pyx_L1_error)
+  __pyx_int_3 = PyInt_FromLong(3); if (unlikely(!__pyx_int_3)) __PYX_ERR(6, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -7795,7 +8542,7 @@ if (unlikely(_import_array() == -1)) {
 #endif
 #endif
 
-if (unlikely(PyErr_Occurred())) __PYX_ERR(5, 1, __pyx_L1_error)
+if (unlikely(PyErr_Occurred())) __PYX_ERR(6, 1, __pyx_L1_error)
 
   return 0;
   __pyx_L1_error:;
@@ -7880,7 +8627,7 @@ static int __Pyx_modinit_type_import_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
-  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 9, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(7, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType_3_0_5(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "type", 
   #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
@@ -7890,7 +8637,7 @@ static int __Pyx_modinit_type_import_code(void) {
   #else
   sizeof(PyHeapTypeObject), __PYX_GET_STRUCT_ALIGNMENT_3_0_5(PyHeapTypeObject),
   #endif
-  __Pyx_ImportType_CheckSize_Warn_3_0_5); if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(6, 9, __pyx_L1_error)
+  __Pyx_ImportType_CheckSize_Warn_3_0_5); if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(7, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyImport_ImportModule("numpy"); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8117,26 +8864,26 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_master(PyObject *__pyx_pyinit_modu
   #else
   #if PY_MAJOR_VERSION < 3
   __pyx_m = Py_InitModule4("master", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
-  if (unlikely(!__pyx_m)) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (unlikely(!__pyx_m)) __PYX_ERR(6, 1, __pyx_L1_error)
   #elif CYTHON_USE_MODULE_STATE
-  __pyx_t_1 = PyModule_Create(&__pyx_moduledef); if (unlikely(!__pyx_t_1)) __PYX_ERR(5, 1, __pyx_L1_error)
+  __pyx_t_1 = PyModule_Create(&__pyx_moduledef); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 1, __pyx_L1_error)
   {
     int add_module_result = PyState_AddModule(__pyx_t_1, &__pyx_moduledef);
     __pyx_t_1 = 0; /* transfer ownership from __pyx_t_1 to master pseudovariable */
-    if (unlikely((add_module_result < 0))) __PYX_ERR(5, 1, __pyx_L1_error)
+    if (unlikely((add_module_result < 0))) __PYX_ERR(6, 1, __pyx_L1_error)
     pystate_addmodule_run = 1;
   }
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
-  if (unlikely(!__pyx_m)) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (unlikely(!__pyx_m)) __PYX_ERR(6, 1, __pyx_L1_error)
   #endif
   #endif
   CYTHON_UNUSED_VAR(__pyx_t_1);
-  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(5, 1, __pyx_L1_error)
+  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(6, 1, __pyx_L1_error)
   Py_INCREF(__pyx_d);
-  __pyx_b = __Pyx_PyImport_AddModuleRef(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(5, 1, __pyx_L1_error)
-  __pyx_cython_runtime = __Pyx_PyImport_AddModuleRef((const char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(5, 1, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  __pyx_b = __Pyx_PyImport_AddModuleRef(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(6, 1, __pyx_L1_error)
+  __pyx_cython_runtime = __Pyx_PyImport_AddModuleRef((const char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(6, 1, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   #if CYTHON_REFNANNY
 __Pyx_RefNanny = __Pyx_RefNannyImportAPI("refnanny");
 if (!__Pyx_RefNanny) {
@@ -8147,30 +8894,30 @@ if (!__Pyx_RefNanny) {
 }
 #endif
   __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_master(void)", 0);
-  if (__Pyx_check_binary_version(__PYX_LIMITED_VERSION_HEX, __Pyx_get_runtime_version(), CYTHON_COMPILING_IN_LIMITED_API) < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__Pyx_check_binary_version(__PYX_LIMITED_VERSION_HEX, __Pyx_get_runtime_version(), CYTHON_COMPILING_IN_LIMITED_API) < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
   #endif
-  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(5, 1, __pyx_L1_error)
-  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(5, 1, __pyx_L1_error)
-  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(5, 1, __pyx_L1_error)
+  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(6, 1, __pyx_L1_error)
+  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(6, 1, __pyx_L1_error)
+  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(6, 1, __pyx_L1_error)
   #ifdef __Pyx_CyFunction_USED
-  if (__pyx_CyFunction_init(__pyx_m) < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__pyx_CyFunction_init(__pyx_m) < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_FusedFunction_USED
-  if (__pyx_FusedFunction_init(__pyx_m) < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__pyx_FusedFunction_init(__pyx_m) < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Coroutine_USED
-  if (__pyx_Coroutine_init(__pyx_m) < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__pyx_Coroutine_init(__pyx_m) < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Generator_USED
-  if (__pyx_Generator_init(__pyx_m) < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__pyx_Generator_init(__pyx_m) < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_AsyncGen_USED
-  if (__pyx_AsyncGen_init(__pyx_m) < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__pyx_AsyncGen_init(__pyx_m) < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_StopAsyncIteration_USED
-  if (__pyx_StopAsyncIteration_init(__pyx_m) < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__pyx_StopAsyncIteration_init(__pyx_m) < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   #endif
   /*--- Library function declarations ---*/
   /*--- Threads initialization code ---*/
@@ -8178,38 +8925,38 @@ if (!__Pyx_RefNanny) {
   PyEval_InitThreads();
   #endif
   /*--- Initialize various global constants etc. ---*/
-  if (__Pyx_InitConstants() < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__Pyx_InitConstants() < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   stringtab_initialized = 1;
-  if (__Pyx_InitGlobals() < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__Pyx_InitGlobals() < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
-  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   #endif
   if (__pyx_module_is_main_master) {
-    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
-    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(5, 1, __pyx_L1_error)
+    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(6, 1, __pyx_L1_error)
     if (!PyDict_GetItemString(modules, "master")) {
-      if (unlikely((PyDict_SetItemString(modules, "master", __pyx_m) < 0))) __PYX_ERR(5, 1, __pyx_L1_error)
+      if (unlikely((PyDict_SetItemString(modules, "master", __pyx_m) < 0))) __PYX_ERR(6, 1, __pyx_L1_error)
     }
   }
   #endif
   /*--- Builtin init code ---*/
-  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   /*--- Constants init code ---*/
-  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
   (void)__Pyx_modinit_function_export_code();
-  if (unlikely((__Pyx_modinit_type_init_code() < 0))) __PYX_ERR(5, 1, __pyx_L1_error)
-  if (unlikely((__Pyx_modinit_type_import_code() < 0))) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (unlikely((__Pyx_modinit_type_init_code() < 0))) __PYX_ERR(6, 1, __pyx_L1_error)
+  if (unlikely((__Pyx_modinit_type_import_code() < 0))) __PYX_ERR(6, 1, __pyx_L1_error)
   (void)__Pyx_modinit_variable_import_code();
   (void)__Pyx_modinit_function_import_code();
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)
-  if (__Pyx_patch_abc() < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (__Pyx_patch_abc() < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   #endif
 
   /* "basicArithmetic.pyx":6
@@ -8219,7 +8966,7 @@ if (!__Pyx_RefNanny) {
  *     return x+y
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_1add, 0, __pyx_n_s_add, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_1add, 0, __pyx_n_s_add, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_add, __pyx_t_2) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8231,7 +8978,7 @@ if (!__Pyx_RefNanny) {
  *     return x-y
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_3sub, 0, __pyx_n_s_sub, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_3sub, 0, __pyx_n_s_sub, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__6)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_sub, __pyx_t_2) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8243,7 +8990,7 @@ if (!__Pyx_RefNanny) {
  *     return x*y
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_5mul, 0, __pyx_n_s_mul, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__6)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_5mul, 0, __pyx_n_s_mul, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_mul, __pyx_t_2) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8255,7 +9002,7 @@ if (!__Pyx_RefNanny) {
  *     return x/y
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_7div, 0, __pyx_n_s_div, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_7div, 0, __pyx_n_s_div, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_div, __pyx_t_2) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8267,7 +9014,7 @@ if (!__Pyx_RefNanny) {
  *     cdef unsigned long long i = 0
  *     cdef unsigned long long result = 0
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_9sum_of_first_n_numbers_cy, 0, __pyx_n_s_sum_of_first_n_numbers_cy, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_9sum_of_first_n_numbers_cy, 0, __pyx_n_s_sum_of_first_n_numbers_cy, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_sum_of_first_n_numbers_cy, __pyx_t_2) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8279,7 +9026,7 @@ if (!__Pyx_RefNanny) {
  *     result = 0
  *     for i in range(number):
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_11sum_of_first_n_numbers_py, 0, __pyx_n_s_sum_of_first_n_numbers_py, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_11sum_of_first_n_numbers_py, 0, __pyx_n_s_sum_of_first_n_numbers_py, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_sum_of_first_n_numbers_py, __pyx_t_2) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8297,11 +9044,11 @@ if (!__Pyx_RefNanny) {
   /* "npTest.pyx":9
  * @cython.boundscheck(False) # turn off bounds-checking for entire function
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
- * cpdef cnp.ndarray add_numpy_elements(cnp.ndarray[dtype=DTYPE_t, ndim=2] arr):             # <<<<<<<<<<<<<<
+ * cpdef cnp.ndarray add_numpy_elements(cnp.ndarray[dtype=DTYPE_INT_t, ndim=2] arr):             # <<<<<<<<<<<<<<
  *     cdef unsigned long long int total = 0# initialisation important here!
  *     cdef int k
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_13add_numpy_elements, 0, __pyx_n_s_add_numpy_elements, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 9, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_13add_numpy_elements, 0, __pyx_n_s_add_numpy_elements, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_add_numpy_elements, __pyx_t_2) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8313,7 +9060,7 @@ if (!__Pyx_RefNanny) {
  *         return self.multiply_inst.getFactor1()
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_3getFactor1, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_getFactor1, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 16, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_3getFactor1, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_getFactor1, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_getFactor1, __pyx_t_2) < 0) __PYX_ERR(4, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8326,7 +9073,7 @@ if (!__Pyx_RefNanny) {
  *         return self.multiply_inst.getFactor2()
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_5getFactor2, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_getFactor2, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 19, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_5getFactor2, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_getFactor2, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_getFactor2, __pyx_t_2) < 0) __PYX_ERR(4, 19, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8339,7 +9086,7 @@ if (!__Pyx_RefNanny) {
  *         return self.multiply_inst.setFactors(factor1, factor2)
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_7setFactors, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_setFactors, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 27, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_7setFactors, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_setFactors, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_setFactors, __pyx_t_2) < 0) __PYX_ERR(4, 27, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8352,7 +9099,7 @@ if (!__Pyx_RefNanny) {
  *         return self.multiply_inst.multiply(factor1, factor2)
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_9multiply, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_multiply, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 30, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_9multiply, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_multiply, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_multiply, __pyx_t_2) < 0) __PYX_ERR(4, 30, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8364,7 +9111,7 @@ if (!__Pyx_RefNanny) {
  *     def multiply(self):             # <<<<<<<<<<<<<<
  *         return self.multiply_inst.multiply()
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_11multiply, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_multiply, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 33, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_11multiply, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply_multiply, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_2)) __PYX_ERR(4, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6master_PyMultiply, __pyx_n_s_multiply, __pyx_t_2) < 0) __PYX_ERR(4, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8375,7 +9122,7 @@ if (!__Pyx_RefNanny) {
  *     raise TypeError, "self.multiply_inst cannot be converted to a Python object for pickling"
  * def __setstate_cython__(self, __pyx_state):
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_13__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply___reduce_cython, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_13__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply___reduce_cython, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_reduce_cython, __pyx_t_2) < 0) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8386,9 +9133,31 @@ if (!__Pyx_RefNanny) {
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     raise TypeError, "self.multiply_inst cannot be converted to a Python object for pickling"
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_15__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply___setstate_cython, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 3, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_10PyMultiply_15__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyMultiply___setstate_cython, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_setstate_cython, __pyx_t_2) < 0) __PYX_ERR(2, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "matrixManipulation.pyx":1
+ * import numpy as np             # <<<<<<<<<<<<<<
+ * cimport numpy as cnp
+ * cimport cython
+ */
+  __pyx_t_2 = __Pyx_ImportDottedModule(__pyx_n_s_numpy, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(5, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "matrixManipulation.pyx":12
+ * # This function performs a matrix multiplication for two given matrices: array1 * array2
+ * # TODO accept the raw numpy array and specify dimension and type afterwards
+ * cpdef cnp.ndarray multiply3DmatricesCython(cnp.ndarray[dtype=DTYPE_UINT64_t, ndim=3] arr1, cnp.ndarray[dtype=DTYPE_UINT64_t, ndim=3] arr2):             # <<<<<<<<<<<<<<
+ * # cpdef cnp.ndarray multiply3DmatricesCython(np.ndarray array1, np.ndarray array2):
+ * 
+ */
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6master_15multiply3DmatricesCython, 0, __pyx_n_s_multiply3DmatricesCython, NULL, __pyx_n_s_master, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_2)) __PYX_ERR(5, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_multiply3DmatricesCython, __pyx_t_2) < 0) __PYX_ERR(5, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "master.pyx":1
@@ -8396,9 +9165,9 @@ if (!__Pyx_RefNanny) {
  * include "npTest.pyx"
  * include "Multiply_wrapper.pyx"
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(5, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(6, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(5, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(6, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /*--- Wrapped vars code ---*/
@@ -12466,7 +13235,7 @@ static PyObject *__Pyx_ImportDottedModule_WalkParts(PyObject *module, PyObject *
 #endif
 static PyObject *__Pyx__ImportDottedModule(PyObject *name, PyObject *parts_tuple) {
 #if PY_MAJOR_VERSION < 3
-    PyObject *module, *from_list, *star = __pyx_n_s__12;
+    PyObject *module, *from_list, *star = __pyx_n_s__13;
     CYTHON_UNUSED_VAR(parts_tuple);
     from_list = PyList_New(1);
     if (unlikely(!from_list))
@@ -13936,7 +14705,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
         Py_XDECREF(name);
-        name = __Pyx_NewRef(__pyx_n_s__25);
+        name = __Pyx_NewRef(__pyx_n_s__28);
     }
     return name;
 }
