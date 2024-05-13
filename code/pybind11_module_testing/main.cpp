@@ -13,6 +13,63 @@ float addFloat(float arg1, float arg2)
     return arg1 + arg2;
 }
 
+py::array_t<float> multiply_3d_arrays(py::array_t<float, py::array::c_style | py::array::forcecast> arr1,
+                                      py::array_t<float, py::array::c_style | py::array::forcecast> arr2) {
+    auto buf1 = arr1.request();
+    auto buf2 = arr2.request();
+    auto ptr1 = static_cast<float *>(buf1.ptr);
+    auto ptr2 = static_cast<float *>(buf2.ptr);
+
+    std::vector<std::vector<std::vector<float>>> vec1(buf1.shape[0], std::vector<std::vector<float>>(buf1.shape[1], std::vector<float>(buf1.shape[2])));
+    std::vector<std::vector<std::vector<float>>> vec2(buf2.shape[0], std::vector<std::vector<float>>(buf2.shape[1], std::vector<float>(buf2.shape[2])));
+
+    //arr1 to vector
+    for (size_t i = 0; i < buf1.shape[0]; ++i) {
+        for (size_t j = 0; j < buf1.shape[1]; ++j) {
+            for (size_t k = 0; k < buf1.shape[2]; ++k) {
+                vec1[i][j][k] = *ptr1++;
+            }
+        }
+    }
+
+    //arr2 to vector
+    for (size_t i = 0; i < buf2.shape[0]; ++i) {
+        for (size_t j = 0; j < buf2.shape[1]; ++j) {
+            for (size_t k = 0; k < buf2.shape[2]; ++k) {
+                vec2[i][j][k] = *ptr2++;
+            }
+        }
+    }
+
+    //matrix mul
+    std::vector<std::vector<std::vector<float>>> result(vec1.size(), std::vector<std::vector<float>>(vec2[0].size(), std::vector<float>(vec2[0][0].size(), 0)));
+
+    for (size_t i = 0; i < vec1.size(); ++i) {
+        for (size_t j = 0; j < vec2[0].size(); ++j) {
+            for (size_t k = 0; k < vec2[0][0].size(); ++k) {
+                for (size_t m = 0; m < vec1[0].size(); ++m) {
+                    result[i][j][k] += vec1[i][m][k] * vec2[m][j][k];
+                }
+            }
+        }
+    }
+
+    //result to numpy array
+    py::array_t<float> result_arr({result.size(), result[0].size(), result[0][0].size()});
+    auto result_buf = result_arr.request();
+    auto result_ptr = static_cast<float *>(result_buf.ptr);
+
+    for (size_t i = 0; i < result.size(); ++i) {
+        for (size_t j = 0; j < result[0].size(); ++j) {
+            for (size_t k = 0; k < result[0][0].size(); ++k) {
+                *result_ptr++ = result[i][j][k];
+            }
+        }
+    }
+
+    return result_arr;
+}
+
 class TestClass{
     public:
         TestClass(float mul){
@@ -49,7 +106,8 @@ class TestClass{
 
 PYBIND11_MODULE(module_name, handle){
     handle.doc() = "This is the module docs.";
-    handle.def("addFloat", &addFloat); 
+    handle.def("addFloat", &addFloat);
+    handle.def("multiply_3d_arrays", &multiply_3d_arrays);
 
     py::class_<TestClass>(handle, "TestClass")
         .def(py::init<float>())
