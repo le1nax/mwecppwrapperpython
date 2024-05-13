@@ -6,14 +6,43 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/numpy.h>
+#include <Eigen/CXX11/Tensor>
+
 namespace py = pybind11;
 
 float addFloat(float arg1, float arg2)
 {
     return arg1 + arg2;
 }
+#include <iostream>
 
-py::array_t<float> multiply_3d_arrays(py::array_t<float, py::array::c_style | py::array::forcecast> arr1,
+
+py::array_t<float> multiply_3d_arrays_using_eigenlibs(py::array_t<float, py::array::c_style | py::array::forcecast> arr1,
+                                       py::array_t<float, py::array::c_style | py::array::forcecast> arr2) {
+    auto buf1 = arr1.request();
+    auto buf2 = arr2.request();
+    auto ptr1 = static_cast<float *>(buf1.ptr);
+    auto ptr2 = static_cast<float *>(buf2.ptr);
+
+    int dim1 = buf1.shape[0];
+    int dim2 = buf1.shape[1];
+    int dim3 = buf1.shape[2];
+
+    Eigen::TensorMap<Eigen::Tensor<float, 3>> tensor1(ptr1, dim1, dim2, dim3);
+    Eigen::TensorMap<Eigen::Tensor<float, 3>> tensor2(ptr2, dim1, dim2, dim3);
+
+    Eigen::Tensor<float, 3> result = tensor1 * tensor2;
+
+    py::array_t<float> result_arr({dim1, dim2, dim3});
+    auto result_buf = result_arr.request();
+    auto result_ptr = static_cast<float *>(result_buf.ptr);
+
+    std::memcpy(result_ptr, result.data(), dim1 * dim2 * dim3 * sizeof(float));
+
+    return result_arr;
+}
+
+py::array_t<float> multiply_3d_arrays_using_stdvector(py::array_t<float, py::array::c_style | py::array::forcecast> arr1,
                                       py::array_t<float, py::array::c_style | py::array::forcecast> arr2) {
     auto buf1 = arr1.request();
     auto buf2 = arr2.request();
@@ -107,7 +136,8 @@ class TestClass{
 PYBIND11_MODULE(module_name, handle){
     handle.doc() = "This is the module docs.";
     handle.def("addFloat", &addFloat);
-    handle.def("multiply_3d_arrays", &multiply_3d_arrays);
+    handle.def("multiply_3d_arrays_using_stdvector", &multiply_3d_arrays_using_stdvector);
+    handle.def("multiply_3d_arrays_using_eigenlibs", &multiply_3d_arrays_using_eigenlibs);
 
     py::class_<TestClass>(handle, "TestClass")
         .def(py::init<float>())

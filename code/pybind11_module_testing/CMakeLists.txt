@@ -10,6 +10,11 @@ set(PYTHON_SCRIPT test_module.py)
 # Set the output directory for the Python module
 set(MODULE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/module")
 
+# Set path to Eigen directory
+set(EIGEN_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/eigen/unsupported)
+
+# Add Eigen to include directories
+include_directories(${EIGEN_INCLUDE_DIR})
 
 # Create the output directory
 file(MAKE_DIRECTORY ${MODULE_OUTPUT_DIRECTORY})

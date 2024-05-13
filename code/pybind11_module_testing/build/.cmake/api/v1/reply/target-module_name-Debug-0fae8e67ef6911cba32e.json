@@ -16,7 +16,8 @@
 			"add_library",
 			"pybind11_add_module",
 			"target_link_libraries",
-			"include"
+			"include",
+			"include_directories"
 		],
 		"files" : 
 		[
@@ -72,6 +73,12 @@
 				"parent" : 7
 			},
 			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 17,
+				"parent" : 0
+			},
+			{
 				"command" : 2,
 				"file" : 0,
 				"line" : 183,
@@ -98,11 +105,15 @@
 			[
 				{
 					"backtrace" : 9,
+					"path" : "C:/Repositories/Medit/MeditC++wrapper/code/pybind11_module_testing/eigen/unsupported"
+				},
+				{
+					"backtrace" : 10,
 					"isSystem" : true,
 					"path" : "C:/Repositories/Medit/MeditC++wrapper/code/pybind11_module_testing/pybind11/include"
 				},
 				{
-					"backtrace" : 9,
+					"backtrace" : 10,
 					"isSystem" : true,
 					"path" : "C:/Users/danie/AppData/Local/Programs/Python/Python37/include"
 				}

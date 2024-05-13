@@ -334,6 +334,9 @@ PYBIND11_SIMPLE_GIL_MANAGEMENT:BOOL=OFF
 //Build pybind11 test suite?
 PYBIND11_TEST:BOOL=OFF
 
+//Path to a program.
+PYTHON_EXECUTABLE:FILEPATH=C:/msys64/mingw64/bin/python3.exe
+
 //Value Computed by CMake
 PyC++_BINARY_DIR:STATIC=C:/Repositories/Medit/MeditC++wrapper/code/pybind11_module_testing/build
 
@@ -550,6 +553,8 @@ FIND_PACKAGE_MESSAGE_DETAILS_PYTHON:INTERNAL=C:/Users/danie/AppData/Local/Progra
 //Details about finding PythonInterp
 FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[C:/Users/danie/AppData/Local/Programs/Python/Python37/python.exe][v3.7.2(3.6)]
 PYBIND11_INCLUDE_DIR:INTERNAL=C:/Repositories/Medit/MeditC++wrapper/code/pybind11_module_testing/pybind11/include
+//ADVANCED property for variable: PYTHON_EXECUTABLE
+PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
 PYTHON_INCLUDE_DIRS:INTERNAL=C:/Users/danie/AppData/Local/Programs/Python/Python37/include
 PYTHON_IS_DEBUG:INTERNAL=0
 PYTHON_LIBRARIES:INTERNAL=C:/Users/danie/AppData/Local/Programs/Python/Python37/libs/python37.lib
