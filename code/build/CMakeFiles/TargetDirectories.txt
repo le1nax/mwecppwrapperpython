@@ -1,5 +1,0 @@
-C:/Repositories/Medit/MeditC++wrapper/code/build/CMakeFiles/module_name.dir
-C:/Repositories/Medit/MeditC++wrapper/code/build/CMakeFiles/edit_cache.dir
-C:/Repositories/Medit/MeditC++wrapper/code/build/CMakeFiles/rebuild_cache.dir
-C:/Repositories/Medit/MeditC++wrapper/code/build/pybind11/CMakeFiles/edit_cache.dir
-C:/Repositories/Medit/MeditC++wrapper/code/build/pybind11/CMakeFiles/rebuild_cache.dir

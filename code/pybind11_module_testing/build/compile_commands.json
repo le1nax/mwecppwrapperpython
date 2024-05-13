@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Repositories/Medit/MeditC++wrapper/code/pybind11_module_testing/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -Dmodule_name_EXPORTS @CMakeFiles/module_name.dir/includes_CXX.rsp -g -fvisibility=hidden -o CMakeFiles\\module_name.dir\\main.cpp.obj -c C:\\Repositories\\Medit\\MeditC++wrapper\\code\\pybind11_module_testing\\main.cpp",
+  "file": "C:/Repositories/Medit/MeditC++wrapper/code/pybind11_module_testing/main.cpp",
+  "output": "CMakeFiles/module_name.dir/main.cpp.obj"
+}
+]
