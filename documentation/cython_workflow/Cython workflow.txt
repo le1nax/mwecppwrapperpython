@@ -1,0 +1,34 @@
+Cython workflow
+
+############## writing cython code ##############
+- create a function
+-- simply create a plain python and store it in a .pyx file
+
+- handling and converting data types
+-- static variables
+
+
+############## END writing cython code ##############
+
+############## building the C code ##############
+- write a setup.py file like follows:
+
+from setuptools import setup
+from Cython.Build import cythonize
+
+setup(
+    name='<Type a short description here>',
+    ext_modules=cythonize("<The name of the .pyx file containing your defined functions>"),
+)
+
+Then generate the C code using cython by executing:
+python3 setup.py build_ext --inplace
+
+Now one can use the compiled function in a python script by importing the module specified in the setup.py
+
+
+TODO: how does this work on windows, linux?
+
+- to show the python interaction in the .pyx file, type:
+cython -a <name of .pyx file>
+############## END building the C code ##############
