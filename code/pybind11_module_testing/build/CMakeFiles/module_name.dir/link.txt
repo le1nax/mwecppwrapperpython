@@ -1,3 +1,1 @@
-C:\Users\danie\AppData\Local\Programs\Python\Python37\Lib\site-packages\cmake\data\bin\cmake.exe -E rm -f CMakeFiles\module_name.dir/objects.a
-C:\msys64\mingw64\bin\ar.exe qc CMakeFiles\module_name.dir/objects.a @CMakeFiles\module_name.dir\objects1.rsp
-C:\msys64\mingw64\bin\g++.exe -g -shared -o module\module_name.cp37-win_amd64.pyd -Wl,--major-image-version,0,--minor-image-version,0 -Wl,--whole-archive CMakeFiles\module_name.dir/objects.a -Wl,--no-whole-archive @CMakeFiles\module_name.dir\linkLibs.rsp
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.4 -bundle -Wl,-headerpad_max_install_names -Xlinker -undefined -Xlinker dynamic_lookup -flto -L/opt/homebrew/opt/arm-gcc-bin@12/lib -o module/module_name.cpython-311-darwin.so CMakeFiles/module_name.dir/main.cpp.o

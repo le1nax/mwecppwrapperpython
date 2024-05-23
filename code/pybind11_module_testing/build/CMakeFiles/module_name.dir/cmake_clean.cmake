@@ -1,9 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/module_name.dir/main.cpp.obj"
-  "CMakeFiles/module_name.dir/main.cpp.obj.d"
-  "libmodule_name.dll.a"
-  "module/module_name.cp37-win_amd64.pyd"
-  "module/module_name.cp37-win_amd64.pyd.manifest"
+  "CMakeFiles/module_name.dir/main.cpp.o"
+  "CMakeFiles/module_name.dir/main.cpp.o.d"
+  "module/module_name.cpython-311-darwin.so"
   "module/module_name.pdb"
 )
 

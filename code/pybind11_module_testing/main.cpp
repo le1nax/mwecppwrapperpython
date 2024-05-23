@@ -6,7 +6,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/numpy.h>
-#include <Eigen/CXX11/Tensor>
+// #include <Eigen/CXX11/Tensor>
 
 namespace py = pybind11;
 
@@ -137,7 +137,7 @@ PYBIND11_MODULE(module_name, handle){
     handle.doc() = "This is the module docs.";
     handle.def("addFloat", &addFloat);
     handle.def("multiply_3d_arrays_using_stdvector", &multiply_3d_arrays_using_stdvector);
-    handle.def("multiply_3d_arrays_using_eigenlibs", &multiply_3d_arrays_using_eigenlibs);
+    // handle.def("multiply_3d_arrays_using_eigenlibs", &multiply_3d_arrays_using_eigenlibs);
 
     py::class_<TestClass>(handle, "TestClass")
         .def(py::init<float>())
