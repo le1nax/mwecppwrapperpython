@@ -77,10 +77,9 @@ print("Pybind11 using std::vector is {}x faster than python".format(pythonTimeMa
 print("Pybind11 using eigen libs is {}x faster than python".format(pythonTimeMatrixMul/pybind11TimeMatrixMul_using_eigenlibs))
 print("Pybind11 using eigen libs is {}x faster than numpy".format(numpyTimeMatrixMul/pybind11TimeMatrixMul_using_eigenlibs))
 
+mat_python = multiply3DmatricesPython(catImg, catImg)
 mat_numpy = multiply3DmatricesNumpy(catImg, catImg)
-mat_python = multiply3DmatricesNumpy(catImg, catImg)
 mat_eiglibs = module_name.multiply_3d_arrays_using_eigenlibs(catImg, catImg)
-
 
 def show_image(img_array):
     # Convert the NumPy array to uint8
@@ -95,9 +94,10 @@ print(mat_numpy.shape)
 print(mat_eiglibs.shape)
 
 show_image(catImg)
+show_image(mat_python)
 show_image(mat_numpy)
 show_image(mat_eiglibs)
 
 print(np.array_equal(mat_numpy, mat_numpy))
-print(np.array_equal(mat_numpy, mat_eiglibs))
 print(np.array_equal(mat_numpy, mat_python))
+print(np.array_equal(mat_numpy, mat_eiglibs))

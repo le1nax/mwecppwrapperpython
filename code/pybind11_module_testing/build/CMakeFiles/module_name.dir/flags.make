@@ -4,9 +4,9 @@
 # compile CXX with /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
 CXX_DEFINES = -Dmodule_name_EXPORTS
 
-CXX_INCLUDES = -isystem /Users/matthi/Documents/Elektrotechnik_Studium/Studium/Master/ss24/Seminar_PyPlusPlus/mwecppwrapperpython/code/pybind11_module_testing/pybind11/include -isystem /opt/homebrew/opt/python@3.11/Frameworks/Python.framework/Versions/3.11/include/python3.11
+CXX_INCLUDES = -I/Users/matthi/Documents/Elektrotechnik_Studium/Studium/Master/ss24/Seminar_PyPlusPlus/mwecppwrapperpython/code/pybind11_module_testing/eigen/unsupported -isystem /Users/matthi/Documents/Elektrotechnik_Studium/Studium/Master/ss24/Seminar_PyPlusPlus/mwecppwrapperpython/code/pybind11_module_testing/pybind11/include -isystem /opt/homebrew/opt/python@3.11/Frameworks/Python.framework/Versions/3.11/include/python3.11
 
-CXX_FLAGSarm64 = -std=gnu++11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.4 -fPIC -fvisibility=hidden -flto
+CXX_FLAGSarm64 = -std=c++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.4 -fPIC -fvisibility=hidden -flto
 
-CXX_FLAGS = -std=gnu++11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.4 -fPIC -fvisibility=hidden -flto
+CXX_FLAGS = -std=c++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.4 -fPIC -fvisibility=hidden -flto
 
