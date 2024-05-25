@@ -19,28 +19,138 @@ float addFloat(float arg1, float arg2)
 
 
 
+// py::array_t<float> 
+// multiply_3d_arrays_using_eigenlibs(py::array_t<float, py::array::c_style | py::array::forcecast> arr1,
+//                                        py::array_t<float, py::array::c_style | py::array::forcecast> arr2) {
+//     auto buf1 = arr1.request();
+//     auto buf2 = arr2.request();
+//     auto ptr1 = static_cast<float *>(buf1.ptr);
+//     auto ptr2 = static_cast<float *>(buf2.ptr);
+
+//     int dim1 = buf1.shape[0];
+//     int dim2 = buf1.shape[1];
+//     int dim3 = buf1.shape[2];
+
+//     std::cout << "dim1: " << dim1 << std::endl;
+//     std::cout << "dim2: " << dim2 << std::endl;
+//     std::cout << "dim3: " << dim3 << std::endl;
+
+//     Eigen::TensorMap<Eigen::Tensor<float, 3>> tensor1(ptr1, dim1, dim2, dim3);
+//     Eigen::TensorMap<Eigen::Tensor<float, 3>> tensor2(ptr2, dim1, dim2, dim3);
+
+//     Eigen::Tensor<float, 3> result = tensor1 * tensor2;
+
+//     py::array_t<float> result_arr({dim1, dim2, dim3});
+//     auto result_buf = result_arr.request();
+//     auto result_ptr = static_cast<float *>(result_buf.ptr);
+
+//     std::memcpy(result_ptr, result.data(), dim1 * dim2 * dim3 * sizeof(float));
+
+//     return result_arr;
+// }
+
+void
+test_ordering(py::array_t<float, py::array::c_style | py::array::forcecast> arr1)
+{
+    py::buffer_info buf1 = arr1.request();
+    float *ptr1 = static_cast<float*>(buf1.ptr);
+
+    // Print strides for debugging
+    std::cout << "Strides: ";
+    for (auto stride : buf1.strides) 
+    {
+        std::cout << stride << " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "First matrix on third dimension: " << *ptr1 << ", " << *(ptr1 + 1) << ", " << *(ptr1 + 2) << ", " << *(ptr1 + 3) << std::endl;
+    std::cout << "Second matrix on third dimesion: " << *(ptr1 + 4) << ", " << *(ptr1 + 5) << ", " << *(ptr1 + 6) << ", " << *(ptr1 + 7) << std::endl;
+    std::cout << "Third matrix on third dimesion: " << *(ptr1 + 8) << ", " << *(ptr1 + 9) << ", " << *(ptr1 + 10) << ", " << *(ptr1 + 11) << std::endl;
+}
+
+void
+test_ordering2(py::array_t<float, py::array::c_style | py::array::forcecast> arr1,
+               py::array_t<float, py::array::c_style | py::array::forcecast> arr2) 
+{
+    py::buffer_info buf1 = arr1.request();
+    py::buffer_info buf2 = arr2.request();
+    float *ptr1 = static_cast<float*>(buf1.ptr);
+    float *ptr2 = static_cast<float*>(buf2.ptr);
+
+    // Print the matrices correctly interpreting C_CONTIGUOUS order
+    std::cout << "First matrix on third dimension: " 
+              << ptr1[0] << ", " << ptr1[2] << ", " << ptr1[4] << ", " << ptr1[6] << std::endl;
+    std::cout << "Second matrix on third dimension: " 
+              << ptr1[1] << ", " << ptr1[3] << ", " << ptr1[5] << ", " << ptr1[7] << std::endl;
+    std::cout << "Third matrix on third dimension: " 
+              << ptr1[8] << ", " << ptr1[10] << ", " << ptr1[9] << ", " << ptr1[11] << std::endl;
+}
+
 py::array_t<float> 
 multiply_3d_arrays_using_eigenlibs(py::array_t<float, py::array::c_style | py::array::forcecast> arr1,
-                                       py::array_t<float, py::array::c_style | py::array::forcecast> arr2) {
-    auto buf1 = arr1.request();
-    auto buf2 = arr2.request();
-    auto ptr1 = static_cast<float *>(buf1.ptr);
-    auto ptr2 = static_cast<float *>(buf2.ptr);
+                                   py::array_t<float, py::array::c_style | py::array::forcecast> arr2) 
+{
+    py::buffer_info buf1 = arr1.request();// contains information on the array: Shape and Strides, a pointer, size and data type
+    py::buffer_info buf2 = arr2.request();
+    float *ptr1 = static_cast<float*>(buf1.ptr);// buf1.ptr is of type void*, so cast to float*
+    float *ptr2 = static_cast<float*>(buf2.ptr);
 
-    int dim1 = buf1.shape[0];
-    int dim2 = buf1.shape[1];
-    int dim3 = buf1.shape[2];
+    int arr1_dim1 = buf1.shape[0]; // Rows of the 2D matrices
+    int arr1_dim2 = buf1.shape[1]; // Columns of the 2D matrices
+    int arr1_dim3 = buf1.shape[2]; // Number of 2D matrices in the 3rd dimension
 
-    Eigen::TensorMap<Eigen::Tensor<float, 3>> tensor1(ptr1, dim1, dim2, dim3);
-    Eigen::TensorMap<Eigen::Tensor<float, 3>> tensor2(ptr2, dim1, dim2, dim3);
+    int arr2_dim1 = buf2.shape[0]; // Rows of the 2D matrices
+    int arr2_dim2 = buf2.shape[1]; // Columns of the 2D matrices
+    int arr2_dim3 = buf2.shape[2]; // Number of 2D matrices in the 3rd dimension
 
-    Eigen::Tensor<float, 3> result = tensor1 * tensor2;
+    std::cout << "arr1_dim1=" << arr1_dim1 << ", arr1_dim2=" << arr1_dim2 << ", arr1_dim3=" << arr1_dim3 << std::endl;
+    std::cout << "arr2_dim1=" << arr2_dim1 << ", arr2_dim2=" << arr2_dim2 << ", arr1_dim3=" << arr2_dim3 << std::endl;
 
-    py::array_t<float> result_arr({dim1, dim2, dim3});
-    auto result_buf = result_arr.request();
-    auto result_ptr = static_cast<float *>(result_buf.ptr);
+    std::cout << "First matrix on third dimension: " << *ptr1 << ", " << *(ptr1 + 1) << ", " << *(ptr1 + 2) << ", " << *(ptr1 + 3) << std::endl;
+    std::cout << "Second matrix on third dimesion: " << *(ptr1 + 4) << ", " << *(ptr1 + 5) << ", " << *(ptr1 + 6) << ", " << *(ptr1 + 7) << std::endl;
+    std::cout << "Third matrix on third dimesion: " << *(ptr1 + 8) << ", " << *(ptr1 + 9) << ", " << *(ptr1 + 10) << ", " << *(ptr1 + 11) << std::endl;
 
-    std::memcpy(result_ptr, result.data(), dim1 * dim2 * dim3 * sizeof(float));
+    std::cout << arr1 << std::endl;
+
+    // // Ensure that the input arrays have the correct shapes
+    // if (arr1_dim2 != arr2_dim1 || arr1_dim3 != arr2_dim3) 
+    // {
+    //     throw std::runtime_error("Shapes of arr1 and arr2 are not compatible for matrix multiplication.");
+    // }
+
+    int result_rows = arr1_dim1;
+    int result_cols = arr2_dim2; // Columns of the second array's 2D matrices
+
+    py::array_t<float> result_arr({result_rows, result_cols, arr1_dim3});
+    py::buffer_info result_buf = result_arr.request();
+    float *result_ptr = static_cast<float *>(result_buf.ptr);
+
+    // py::array_t<float> result_arr_rowMajor({result_rows, result_cols, arr1_dim3});
+    // py::buffer_info result_buf_rowMajor = result_arr_rowMajor.request();
+    // float *result_ptr_rowMajor = static_cast<float *>(result_buf_rowMajor.ptr);
+
+    for (int i = 0; i < arr1_dim1; ++i) 
+    {
+        Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>> mat1(ptr1 + i * arr1_dim2 * arr1_dim3, arr1_dim2, arr1_dim3);
+        std::cout << mat1 << std::endl;
+        std::cout << std::endl;
+        Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>> mat2(ptr2 + i * arr2_dim2 * arr2_dim3, arr2_dim2, arr2_dim3);
+        std::cout << mat2 << std::endl;
+        std::cout << std::endl;
+        Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>> mat_result(result_ptr + i * result_cols * arr1_dim3, result_cols, arr1_dim3);
+        std::cout << mat_result << std::endl;
+        std::cout << std::endl;
+
+        mat_result.noalias() = mat1 * mat2; // Matrix multiplication
+        std::cout << mat_result << std::endl;
+        std::cout << std::endl;
+        // Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> mat_result_rowMajor = mat_result;
+        // mat_result = mat1 * mat2; // Matrix multiplication
+    }
+
+    std::cout << "First matrix on third dimension: " << *ptr1 << ", " << *(ptr1 + 1) << ", " << *(ptr1 + 2) << ", " << *(ptr1 + 3) << std::endl;
+    std::cout << "Second matrix on third dimesion: " << *(ptr1 + 4) << ", " << *(ptr1 + 5) << ", " << *(ptr1 + 6) << ", " << *(ptr1 + 7) << std::endl;
+    std::cout << "Third matrix on third dimesion: " << *(ptr1 + 8) << ", " << *(ptr1 + 9) << ", " << *(ptr1 + 10) << ", " << *(ptr1 + 11) << std::endl;
 
     return result_arr;
 }
@@ -142,6 +252,8 @@ PYBIND11_MODULE(module_name, handle){
     handle.def("addFloat", &addFloat);
     handle.def("multiply_3d_arrays_using_stdvector", &multiply_3d_arrays_using_stdvector);
     handle.def("multiply_3d_arrays_using_eigenlibs", &multiply_3d_arrays_using_eigenlibs);
+    handle.def("test_ordering", &test_ordering);
+    handle.def("test_ordering2", &test_ordering2);
 
     py::class_<TestClass>(handle, "TestClass")
         .def(py::init<float>())

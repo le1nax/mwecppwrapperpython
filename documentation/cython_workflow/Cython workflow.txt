@@ -1,6 +1,10 @@
-Cython workflow
+#######################################
+Some general information about cython
+#######################################
 
-############## writing cython code ##############
+#######################################
+writing cython code
+#######################################
 - create a function
 -- simply create a plain python and store it in a .pyx file
 
@@ -8,9 +12,10 @@ Cython workflow
 -- static variables
 
 
-############## END writing cython code ##############
+#######################################
+building the C code
+#######################################
 
-############## building the C code ##############
 - write a setup.py file like follows:
 
 from setuptools import setup
@@ -31,4 +36,3 @@ TODO: how does this work on windows, linux?
 
 - to show the python interaction in the .pyx file, type:
 cython -a <name of .pyx file>
-############## END building the C code ##############

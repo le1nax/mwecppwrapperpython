@@ -9,11 +9,14 @@ Getting things to work from scratch
 #######################################
 1) Cloning the pybind11 repository
 1.1) In your project directory, clone the pybind11 repository:
+
 git clone git@github.com:pybind/pybind11.git
 
 2) Create your python bindings
 2.1) Create a yourPythonBindings.cpp file and include the pybind11 headers:
+
 #include <pybind11/pybind11.h>
+
 2.2) Write any function to be used in python
 2.3) Create Pybind11_Module by calling 
 
@@ -46,6 +49,7 @@ set_target_properties(module_name PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${MODULE_O
 cmake ..
 
 This will configure the build system by generating build files from the CMakeLists.txt
+
 3.5) Inside /build, execute
 
 cmake --build .
@@ -54,7 +58,7 @@ This will use the generated build files to compile and link the source code, pro
 
 4) Use your bindings from python
 4.1) First tell the python interpreter where to find your .so file. If you have followed the procedure above, your .so file should be located in /build/module/ inside your project directory. 
-So you can create a textMyBindings.py file and populate it with the following lines:
+So you can create a testMyBindings.py file and populate it with the following lines:
 
 import sys
 import os
@@ -72,4 +76,13 @@ module_name.functionNameInPython(..)
 
 4.2) Now run your python script:
 
-python3 textMyBindings.py
+python3 testMyBindings.py
+
+#######################################
+Subsequent workflow
+#######################################
+Once you have conducted the procedure above, it is sufficient to run
+
+cmake --build .
+
+in your build folder once the binding definition has changed. After that the bindings should be updated and usable from within your python application.

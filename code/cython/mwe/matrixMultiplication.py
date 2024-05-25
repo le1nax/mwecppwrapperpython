@@ -11,6 +11,11 @@ def multiply3DmatricesNumpy(arr1, arr2):
     return returnArray
     
 def multiply3DmatricesPython(arr1, arr2):
+
+    # print("arr1.shape[0]" + str(arr1.shape[0]))
+    # print("arr1.shape[1]" + str(arr1.shape[1]))
+    # print("arr1.shape[2]" + str(arr1.shape[2]))
+
     # Iterate through third dimension and perform matrix multiplication
     numOfRowsArr1 = arr1.shape[0]
     numOfColumnsArr1 = arr1.shape[1]
