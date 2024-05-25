@@ -86,6 +86,7 @@ test_ordering2(py::array_t<float, py::array::c_style | py::array::forcecast> arr
               << ptr1[8] << ", " << ptr1[10] << ", " << ptr1[9] << ", " << ptr1[11] << std::endl;
 }
 
+// TODO: Eigen::Tensor should be a better fit for higher order matrix manipulations
 py::array_t<float> 
 multiply_3d_arrays_using_eigenlibs(py::array_t<float, py::array::c_style | py::array::forcecast> arr1,
                                    py::array_t<float, py::array::c_style | py::array::forcecast> arr2) 
@@ -103,14 +104,14 @@ multiply_3d_arrays_using_eigenlibs(py::array_t<float, py::array::c_style | py::a
     int arr2_dim2 = buf2.shape[1]; // Columns of the 2D matrices
     int arr2_dim3 = buf2.shape[2]; // Number of 2D matrices in the 3rd dimension
 
-    std::cout << "arr1_dim1=" << arr1_dim1 << ", arr1_dim2=" << arr1_dim2 << ", arr1_dim3=" << arr1_dim3 << std::endl;
-    std::cout << "arr2_dim1=" << arr2_dim1 << ", arr2_dim2=" << arr2_dim2 << ", arr1_dim3=" << arr2_dim3 << std::endl;
+    // std::cout << "arr1_dim1=" << arr1_dim1 << ", arr1_dim2=" << arr1_dim2 << ", arr1_dim3=" << arr1_dim3 << std::endl;
+    // std::cout << "arr2_dim1=" << arr2_dim1 << ", arr2_dim2=" << arr2_dim2 << ", arr1_dim3=" << arr2_dim3 << std::endl;
 
-    std::cout << "First matrix on third dimension: " << *ptr1 << ", " << *(ptr1 + 1) << ", " << *(ptr1 + 2) << ", " << *(ptr1 + 3) << std::endl;
-    std::cout << "Second matrix on third dimesion: " << *(ptr1 + 4) << ", " << *(ptr1 + 5) << ", " << *(ptr1 + 6) << ", " << *(ptr1 + 7) << std::endl;
-    std::cout << "Third matrix on third dimesion: " << *(ptr1 + 8) << ", " << *(ptr1 + 9) << ", " << *(ptr1 + 10) << ", " << *(ptr1 + 11) << std::endl;
+    // std::cout << "First matrix on third dimension: " << *ptr1 << ", " << *(ptr1 + 1) << ", " << *(ptr1 + 2) << ", " << *(ptr1 + 3) << std::endl;
+    // std::cout << "Second matrix on third dimesion: " << *(ptr1 + 4) << ", " << *(ptr1 + 5) << ", " << *(ptr1 + 6) << ", " << *(ptr1 + 7) << std::endl;
+    // std::cout << "Third matrix on third dimesion: " << *(ptr1 + 8) << ", " << *(ptr1 + 9) << ", " << *(ptr1 + 10) << ", " << *(ptr1 + 11) << std::endl;
 
-    std::cout << arr1 << std::endl;
+    // std::cout << arr1 << std::endl;
 
     // // Ensure that the input arrays have the correct shapes
     // if (arr1_dim2 != arr2_dim1 || arr1_dim3 != arr2_dim3) 
@@ -125,32 +126,28 @@ multiply_3d_arrays_using_eigenlibs(py::array_t<float, py::array::c_style | py::a
     py::buffer_info result_buf = result_arr.request();
     float *result_ptr = static_cast<float *>(result_buf.ptr);
 
-    // py::array_t<float> result_arr_rowMajor({result_rows, result_cols, arr1_dim3});
-    // py::buffer_info result_buf_rowMajor = result_arr_rowMajor.request();
-    // float *result_ptr_rowMajor = static_cast<float *>(result_buf_rowMajor.ptr);
-
     for (int i = 0; i < arr1_dim1; ++i) 
     {
         Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>> mat1(ptr1 + i * arr1_dim2 * arr1_dim3, arr1_dim2, arr1_dim3);
-        std::cout << mat1 << std::endl;
-        std::cout << std::endl;
+        // std::cout << mat1 << std::endl;
+        // std::cout << std::endl;
         Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>> mat2(ptr2 + i * arr2_dim2 * arr2_dim3, arr2_dim2, arr2_dim3);
-        std::cout << mat2 << std::endl;
-        std::cout << std::endl;
+        // std::cout << mat2 << std::endl;
+        // std::cout << std::endl;
         Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>> mat_result(result_ptr + i * result_cols * arr1_dim3, result_cols, arr1_dim3);
-        std::cout << mat_result << std::endl;
-        std::cout << std::endl;
+        // std::cout << mat_result << std::endl;
+        // std::cout << std::endl;
 
         mat_result.noalias() = mat1 * mat2; // Matrix multiplication
-        std::cout << mat_result << std::endl;
-        std::cout << std::endl;
+        // std::cout << mat_result << std::endl;
+        // std::cout << std::endl;
         // Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> mat_result_rowMajor = mat_result;
         // mat_result = mat1 * mat2; // Matrix multiplication
     }
 
-    std::cout << "First matrix on third dimension: " << *ptr1 << ", " << *(ptr1 + 1) << ", " << *(ptr1 + 2) << ", " << *(ptr1 + 3) << std::endl;
-    std::cout << "Second matrix on third dimesion: " << *(ptr1 + 4) << ", " << *(ptr1 + 5) << ", " << *(ptr1 + 6) << ", " << *(ptr1 + 7) << std::endl;
-    std::cout << "Third matrix on third dimesion: " << *(ptr1 + 8) << ", " << *(ptr1 + 9) << ", " << *(ptr1 + 10) << ", " << *(ptr1 + 11) << std::endl;
+    // std::cout << "First matrix on third dimension: " << *ptr1 << ", " << *(ptr1 + 1) << ", " << *(ptr1 + 2) << ", " << *(ptr1 + 3) << std::endl;
+    // std::cout << "Second matrix on third dimesion: " << *(ptr1 + 4) << ", " << *(ptr1 + 5) << ", " << *(ptr1 + 6) << ", " << *(ptr1 + 7) << std::endl;
+    // std::cout << "Third matrix on third dimesion: " << *(ptr1 + 8) << ", " << *(ptr1 + 9) << ", " << *(ptr1 + 10) << ", " << *(ptr1 + 11) << std::endl;
 
     return result_arr;
 }
