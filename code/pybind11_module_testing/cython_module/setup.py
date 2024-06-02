@@ -7,9 +7,10 @@
 from setuptools import setup, Extension
 from Cython.Build import cythonize
 import numpy as np
+import eigency
 import os
 
-os.environ["CPP"] = "clang++"# C++ compiler
+os.environ["CPP"] = "clang++"# C++ compiler TODO make platform independent
 os.environ["CPPFLAGS"] = "-std=c++20"# specify c++ version
 
 # TODO this is not working!
@@ -42,7 +43,8 @@ os.environ["CPPFLAGS"] = "-std=c++20"# specify c++ version
 extensions = [
     Extension("master",# important: module name has to be the same as the .pyx file, otherwise ImportError
               ["master.pyx"],
-              include_dirs=[np.get_include()],
+            #   include_dirs=[".", np.get_include(), './eigen/Eigen'] + eigency.get_includes(),
+              include_dirs=[".", np.get_include(), './eigen'],
               language="c++",),
 ]
 

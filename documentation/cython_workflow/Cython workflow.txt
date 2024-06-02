@@ -36,3 +36,15 @@ TODO: how does this work on windows, linux?
 
 - to show the python interaction in the .pyx file, type:
 cython -a <name of .pyx file>
+
+#######################################
+eigency hack
+#######################################
+
+1) In eigency_cpp.h and eigency.h, change
+
+#include <Eigen/Core>
+
+to
+
+#include <eigen/Eigen/Core>

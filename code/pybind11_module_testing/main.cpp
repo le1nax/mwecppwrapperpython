@@ -152,6 +152,43 @@ multiply_3d_arrays_using_eigenlibs(py::array_t<float, py::array::c_style | py::a
     return result_arr;
 }
 
+template <typename T>
+py::array_t<T>
+multiply_3d_arrays_using_eigenlibs_template(py::array_t<T, py::array::c_style | py::array::forcecast> arr1,
+                                            py::array_t<T, py::array::c_style | py::array::forcecast> arr2)
+{
+    py::buffer_info buf1 = arr1.request();// contains information on the array: Shape and Strides, a pointer, size and data type
+    py::buffer_info buf2 = arr2.request();
+    T *ptr1 = static_cast<T*>(buf1.ptr);// buf1.ptr is of type void*, so cast to float*
+    T *ptr2 = static_cast<T*>(buf2.ptr);
+
+    const int arr1_dim1 = buf1.shape[0]; // Rows of the 2D matrices
+    const int arr1_dim2 = buf1.shape[1]; // Columns of the 2D matrices
+    const int arr1_dim3 = buf1.shape[2]; // Number of 2D matrices in the 3rd dimension
+
+    const int arr2_dim1 = buf2.shape[0]; // Rows of the 2D matrices
+    const int arr2_dim2 = buf2.shape[1]; // Columns of the 2D matrices
+    const int arr2_dim3 = buf2.shape[2]; // Number of 2D matrices in the 3rd dimension
+
+    const int result_rows = arr1_dim1;
+    const int result_cols = arr2_dim2; // Columns of the second array's 2D matrices
+
+    py::array_t<T> result_arr({result_rows, result_cols, arr1_dim3});
+    py::buffer_info result_buf = result_arr.request();
+    T *result_ptr = static_cast<T *>(result_buf.ptr);
+
+    for (int i = 0; i < arr1_dim1; ++i) 
+    {
+        Eigen::Map<Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>> mat1(ptr1 + i * arr1_dim2 * arr1_dim3, arr1_dim2, arr1_dim3);
+        Eigen::Map<Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>> mat2(ptr2 + i * arr2_dim2 * arr2_dim3, arr2_dim2, arr2_dim3);
+        Eigen::Map<Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>> mat_result(result_ptr + i * result_cols * arr1_dim3, result_cols, arr1_dim3);
+
+        mat_result.noalias() = mat1 * mat2; // Matrix multiplication
+    }
+
+    return result_arr;
+}
+
 py::array_t<float> 
 multiply_3d_arrays_using_stdvector(py::array_t<float, py::array::c_style | py::array::forcecast> arr1,
                                       py::array_t<float, py::array::c_style | py::array::forcecast> arr2) {
@@ -249,6 +286,9 @@ PYBIND11_MODULE(module_name, handle){
     handle.def("addFloat", &addFloat);
     handle.def("multiply_3d_arrays_using_stdvector", &multiply_3d_arrays_using_stdvector);
     handle.def("multiply_3d_arrays_using_eigenlibs", &multiply_3d_arrays_using_eigenlibs);
+    handle.def("multiply_3d_arrays_using_eigenlibs_template", &multiply_3d_arrays_using_eigenlibs_template<float>, "Multiply 3D arrays (float)");
+    handle.def("multiply_3d_arrays_using_eigenlibs_template", &multiply_3d_arrays_using_eigenlibs_template<double>, "Multiply 3D arrays (double)");
+    handle.def("multiply_3d_arrays_using_eigenlibs_template", &multiply_3d_arrays_using_eigenlibs_template<int>, "Multiply 3D arrays (int)");
     handle.def("test_ordering", &test_ordering);
     handle.def("test_ordering2", &test_ordering2);
 

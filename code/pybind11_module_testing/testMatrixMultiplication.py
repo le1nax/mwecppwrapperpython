@@ -70,6 +70,7 @@ pythonTimeMatrixMul = timeit.Timer(lambda: multiply3DmatricesPython(catImg, catI
 cythonTimeMatrixMul = timeit.Timer(lambda: mwe.multiply3DmatricesCython(catImg, catImg), setup=setupCython).timeit(number=numOfExecutions)
 pybind11TimeMatrixMul_using_stdvector = timeit.Timer(lambda: module_name.multiply_3d_arrays_using_stdvector(catImg, catImg), setup=setupPybind11).timeit(number=numOfExecutions)
 pybind11TimeMatrixMul_using_eigenlibs = timeit.Timer(lambda: module_name.multiply_3d_arrays_using_eigenlibs(np.transpose(catImg, (2, 0, 1)), np.transpose(catImg, (2, 0, 1))), setup=setupPybind11).timeit(number=numOfExecutions)
+pybind11TimeMatrixMul_using_eigenlibs_template = timeit.Timer(lambda: module_name.multiply_3d_arrays_using_eigenlibs_template(np.transpose(catImg, (2, 0, 1)), np.transpose(catImg, (2, 0, 1))), setup=setupPybind11).timeit(number=numOfExecutions)
 
 print("numpyTimeMatrixMul=" + str(numpyTimeMatrixMul))
 print("pythonTimeMatrixMul=" + str(pythonTimeMatrixMul))

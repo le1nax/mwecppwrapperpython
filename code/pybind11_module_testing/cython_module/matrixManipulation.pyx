@@ -50,4 +50,3 @@ cpdef cnp.ndarray multiply3DmatricesCython(cnp.ndarray[dtype=DTYPE_UINT64_t, ndi
                 returnArray[rowArr1, columnArr2, rgbIter] = currentEntry
     
     return returnArray
-    
