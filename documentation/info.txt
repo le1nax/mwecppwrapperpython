@@ -1,2 +1,0 @@
-Put your manual/guide and additional documentation (e.g. third-party-software licenses) here.
-This file can be deleted after that.

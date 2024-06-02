@@ -1,0 +1,63 @@
+\hypertarget{main_8cpp}{}\doxysection{/\+Users/matthi/\+Documents/\+Elektrotechnik\+\_\+\+Studium/\+Studium/\+Master/ss24/\+Seminar\+\_\+\+Py\+Plus\+Plus/mwecppwrapperpython/code/pybind11\+\_\+module\+\_\+testing/main.cpp File Reference}
+\label{main_8cpp}\index{/Users/matthi/Documents/Elektrotechnik\_Studium/Studium/Master/ss24/Seminar\_PyPlusPlus/mwecppwrapperpython/code/pybind11\_module\_testing/main.cpp@{/Users/matthi/Documents/Elektrotechnik\_Studium/Studium/Master/ss24/Seminar\_PyPlusPlus/mwecppwrapperpython/code/pybind11\_module\_testing/main.cpp}}
+
+
+This file contains the definitions of the pybind11 bindings.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$pybind11/pybind11.\+h$>$}\newline
+{\ttfamily \#include $<$pybind11/stl.\+h$>$}\newline
+{\ttfamily \#include $<$pybind11/numpy.\+h$>$}\newline
+{\ttfamily \#include $<$Eigen/\+CXX11/\+Tensor$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_test_class}{Test\+Class}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8cpp_aab01b9413618c5e382b57d7098948063}\label{main_8cpp_aab01b9413618c5e382b57d7098948063}} 
+float {\bfseries add\+Float} (float arg1, float arg2)
+\item 
+void \mbox{\hyperlink{main_8cpp_aa587c8bc568789609860aec379c66347}{test\+\_\+ordering}} (py\+::array\+\_\+t$<$ float, py\+::array\+::c\+\_\+style$\vert$py\+::array\+::forcecast $>$ arr1)
+\begin{DoxyCompactList}\small\item\em Test how the numpy memory lies in memory. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8cpp_a7c2708ee7fc7a10672c2a93d03acff0d}\label{main_8cpp_a7c2708ee7fc7a10672c2a93d03acff0d}} 
+void {\bfseries test\+\_\+ordering2} (py\+::array\+\_\+t$<$ float, py\+::array\+::c\+\_\+style$\vert$py\+::array\+::forcecast $>$ arr1, py\+::array\+\_\+t$<$ float, py\+::array\+::c\+\_\+style$\vert$py\+::array\+::forcecast $>$ arr2)
+\item 
+\mbox{\Hypertarget{main_8cpp_aa125295ffebb1a86e55b82674670f85e}\label{main_8cpp_aa125295ffebb1a86e55b82674670f85e}} 
+py\+::array\+\_\+t$<$ float $>$ {\bfseries multiply\+\_\+3d\+\_\+arrays\+\_\+using\+\_\+eigenlibs} (py\+::array\+\_\+t$<$ float, py\+::array\+::c\+\_\+style$\vert$py\+::array\+::forcecast $>$ arr1, py\+::array\+\_\+t$<$ float, py\+::array\+::c\+\_\+style$\vert$py\+::array\+::forcecast $>$ arr2)
+\item 
+\mbox{\Hypertarget{main_8cpp_adcc6bf9a7fbe33b6f94d1c033d81b4ff}\label{main_8cpp_adcc6bf9a7fbe33b6f94d1c033d81b4ff}} 
+{\footnotesize template$<$typename T $>$ }\\py\+::array\+\_\+t$<$ T $>$ {\bfseries multiply\+\_\+3d\+\_\+arrays\+\_\+using\+\_\+eigenlibs\+\_\+template} (py\+::array\+\_\+t$<$ T, py\+::array\+::c\+\_\+style$\vert$py\+::array\+::forcecast $>$ arr1, py\+::array\+\_\+t$<$ T, py\+::array\+::c\+\_\+style$\vert$py\+::array\+::forcecast $>$ arr2)
+\item 
+\mbox{\Hypertarget{main_8cpp_a1a18c132605ad5acd54223c8d0b016f1}\label{main_8cpp_a1a18c132605ad5acd54223c8d0b016f1}} 
+py\+::array\+\_\+t$<$ float $>$ {\bfseries multiply\+\_\+3d\+\_\+arrays\+\_\+using\+\_\+stdvector} (py\+::array\+\_\+t$<$ float, py\+::array\+::c\+\_\+style$\vert$py\+::array\+::forcecast $>$ arr1, py\+::array\+\_\+t$<$ float, py\+::array\+::c\+\_\+style$\vert$py\+::array\+::forcecast $>$ arr2)
+\item 
+\mbox{\Hypertarget{main_8cpp_a1616b39dd09e8cce6f8753a8f21cda07}\label{main_8cpp_a1616b39dd09e8cce6f8753a8f21cda07}} 
+{\bfseries PYBIND11\+\_\+\+MODULE} (module\+\_\+name, handle)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains the definitions of the pybind11 bindings. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_aa587c8bc568789609860aec379c66347}\label{main_8cpp_aa587c8bc568789609860aec379c66347}} 
+\index{main.cpp@{main.cpp}!test\_ordering@{test\_ordering}}
+\index{test\_ordering@{test\_ordering}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_ordering()}{test\_ordering()}}
+{\footnotesize\ttfamily void test\+\_\+ordering (\begin{DoxyParamCaption}\item[{py\+::array\+\_\+t$<$ float, py\+::array\+::c\+\_\+style$\vert$py\+::array\+::forcecast $>$}]{arr1 }\end{DoxyParamCaption})}
+
+
+
+Test how the numpy memory lies in memory. 
+
+Here we try to illuminate the way how the passed array lies in memory 
+\begin{DoxyParams}{Parameters}
+{\em arr1} & The numpy array to be investigated \\
+\hline
+\end{DoxyParams}

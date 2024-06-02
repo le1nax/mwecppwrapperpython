@@ -1,3 +1,8 @@
+/** @file main.cpp
+ * \brief This file contains the definitions of the pybind11 bindings
+ * 
+ * */ 
+
 #ifdef _WIN64
 #define _hypot hypot
 #include <cmath>
@@ -49,6 +54,11 @@ float addFloat(float arg1, float arg2)
 //     return result_arr;
 // }
 
+/*! \brief Test how the numpy memory lies in memory.
+ *
+ * Here we try to illuminate the way how the passed array lies in memory
+ * @param arr1 The numpy array to be investigated
+ */
 void
 test_ordering(py::array_t<float, py::array::c_style | py::array::forcecast> arr1)
 {
